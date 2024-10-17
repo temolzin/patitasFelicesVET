@@ -1,0 +1,57 @@
+/* shelters.css */
+#shelters .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+#shelters .shelter-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.2s;
+    padding: 20px;
+}
+
+#shelters .shelter-card:hover {
+    transform: scale(1.05);
+}
+
+#shelters .shelter-card img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 100%;
+    height: auto;
+}
+
+#shelters .shelter-card h4 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #444;
+}
+
+#shelters .shelter-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+#shelters .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 4px;
+    background-color: #ff6700;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+#shelters .btn:hover {
+    background-color: #e05d00;
+}

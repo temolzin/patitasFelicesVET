@@ -1,0 +1,65 @@
+#calendar {
+    border: 2px solid #db9b1b;
+    border-top-width: 5px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.fc-toolbar {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.fc-day-header {
+    background-color: #b5e9a8;
+    color: white;
+    padding: 10px;
+}
+
+.fc-day {
+    padding: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.fc-event {
+    background-color: #657f9d;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 5px;
+}
+
+.small-box .inner {
+    color: #ffffff;
+}
+
+img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.nav-item img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.head{
+    background: #eae5e5;
+     margin-top: 20px; 
+     margin-bottom: 40px; 
+     padding: 20px;
+}
+
+.welcome{
+    font-size: 30px; 
+    margin-bottom: 10px;
+}
+
+.user-header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
