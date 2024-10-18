@@ -16,12 +16,12 @@ class CreateDeathsTable extends Migration
         Schema::create('deaths', function (Blueprint $table) {
             $table->id('death_id');
             $table->unsignedBigInteger('animal_id');
-            $table->unsignedBigInteger('shelter_id')->nullable();
+            $table->unsignedBigInteger('vet_id')->nullable();
             $table->date('date');
             $table->string('cause')->nullable();
 
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
-            $table->foreign('shelter_id')->references('id')->on('shelters')->onDelete('cascade');
+            $table->foreign('vet_id')->references('id')->on('vets')->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletes();

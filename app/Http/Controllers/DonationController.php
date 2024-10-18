@@ -13,22 +13,22 @@ class DonationController extends Controller
     public function pdfDonation($id)
     {
         $id = Crypt::decrypt($id);
-        $shelter = Auth::user()->shelter;
+        $vet = Auth::user()->vet;
         
         $donation = Donation::where('id', $id)
-            ->with(['shelterMember'])
+            ->with(['vetMember'])
             ->firstOrFail();
         
-        $shelterMember = $donation->shelterMember;
+        $vetMember = $donation->vetMember;
         
-        $pdf = PDF::loadView('donations.pdfDonation', compact('donation', 'shelterMember', 'shelter'));
+        $pdf = PDF::loadView('donations.pdfDonation', compact('donation', 'vetMember', 'vet'));
         return $pdf->stream();
     }
    
     public function store(Request $request)
     {
         $request->validate([
-            'shelter_member_id' => 'required|exists:shelter_member,id',
+            'vet_member_id' => 'required|exists:vet_member,id',
             'donation_date' => 'required|date',
             'type' => 'required|in:' .implode(',',Donation::DONATION),
             'amount' => 'required|numeric',
@@ -36,7 +36,7 @@ class DonationController extends Controller
         ]);
 
         $donation = new Donation();
-        $donation->shelter_member_id = $request->input('shelter_member_id');
+        $donation->vet_member_id = $request->input('vet_member_id');
         $donation->donation_date = $request->input('donation_date');
         $donation->type = $request->input('type');
         $donation->amount = $request->input('amount');

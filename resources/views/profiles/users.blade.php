@@ -83,54 +83,54 @@
                         <p>Aquí puedes incluir información relevante para el administrador.</p>
                     </div>
                     
-            @elseif($user->hasRole('shelter'))
+            @elseif($user->hasRole('vet'))
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Información del Albergue</h3>
+                        <h3 class="card-title">Información de la Veterinaria</h3>
                     </div>
                     <div class="card-body text-center">
                     <div class="profile-img-container">
-                    <img src="{{ $user->getFirstMediaUrl('shelterGallery') ?: asset('img/shelterdefault.png') }}" class="img-circle elevation-2" alt="Shelter Image" style="width: 150px; height: 150px;">
-                        <a href="#" class="btn btn-outline-primary btn-sm edit-profile-pic" data-toggle="modal" data-target="#editLogoShelter{{ $user->id }}">
+                    <img src="{{ $user->getFirstMediaUrl('vetGallery') ?: asset('img/vetdefault.png') }}" class="img-circle elevation-2" alt="Vet Image" style="width: 150px; height: 150px;">
+                        <a href="#" class="btn btn-outline-primary btn-sm edit-profile-pic" data-toggle="modal" data-target="#editLogoVet{{ $user->id }}">
                             <i class="fas fa-camera"></i>
                         </a>
                     </div>
                     <div class="card-body">
                         <div class="row mb-2">
-                            <strong class="col-sm-4">Nombre del Albergue:</strong>
-                            <span class="col-sm-8">{{ $shelter->name }}</span>
+                            <strong class="col-sm-4">Nombre de la Veterinaria:</strong>
+                            <span class="col-sm-8">{{ $vet->name }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Teléfono:</strong>
-                            <span class="col-sm-8">{{ $shelter->phone }}</span>
+                            <span class="col-sm-8">{{ $vet->phone }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Facebook:</strong>
-                            <span class="col-sm-8">{{ $shelter->facebook }}</span>
+                            <span class="col-sm-8">{{ $vet->facebook }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">TikTok:</strong>
-                            <span class="col-sm-8">{{ $shelter->tiktok }}</span>
+                            <span class="col-sm-8">{{ $vet->tiktok }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Estado:</strong>
-                            <span class="col-sm-8">{{ $shelter->state }}</span>
+                            <span class="col-sm-8">{{ $vet->state }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Ciudad:</strong>
-                            <span class="col-sm-8">{{ $shelter->city }}</span>
+                            <span class="col-sm-8">{{ $vet->city }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Colonia:</strong>
-                            <span class="col-sm-8">{{ $shelter->colony }}</span>
+                            <span class="col-sm-8">{{ $vet->colony }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Dirección:</strong>
-                            <span class="col-sm-8">{{ $shelter->address }}</span>
+                            <span class="col-sm-8">{{ $vet->address }}</span>
                         </div>
                         <div class="row mb-2">
                             <strong class="col-sm-4">Código Postal:</strong>
-                            <span class="col-sm-8">{{ $shelter->postal_code }}</span>
+                            <span class="col-sm-8">{{ $vet->postal_code }}</span>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="editLogoShelter{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabeli" aria-hidden="true">
+<div class="modal fade" id="editLogoVet{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabeli" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="card-warning">
@@ -204,7 +204,7 @@
                         </button>
                     </div>
                 </div>
-                <form action="{{ route('user.updatePictureShelter') }}" enctype="multipart/form-data" method="POST" id="edit-shelter-form">
+                <form action="{{ route('user.updatePictureVet') }}" enctype="multipart/form-data" method="POST" id="edit-vet-form">
                     @csrf
                     @method('POST')
                     <div class="card-body">
@@ -223,13 +223,13 @@
                                         <div class="form-group text-center">
                                             <label for="photo-{{ $user->id }}" class="form-label"></label>
                                             <div class="image-preview-container" style="display: flex; justify-content: center; margin-bottom: 10px;">
-                                                <img id="photo-preview-shelter-{{ $user->id }}" 
-                                                     src="{{ $user->getFirstMediaUrl('shelterGallery') ? $user->getFirstMediaUrl('shelterGallery') : asset('img/shelterdefault.png') }}" 
+                                                <img id="photo-preview-vet-{{ $user->id }}" 
+                                                     src="{{ $user->getFirstMediaUrl('vetGallery') ? $user->getFirstMediaUrl('vetGallery') : asset('img/vetdefault.png') }}" 
                                                      alt="Foto Actual" 
                                                      style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 5px;">
                                             </div>
-                                            <input type="hidden" name="shelter_id" value="{{ $user->id }}">
-                                            <input type="file" class="form-control" name="photo" id="photo-{{ $user->id }}" onchange="previewImageEditShelter(event, {{ $user->id }})">
+                                            <input type="hidden" name="vet_id" value="{{ $user->id }}">
+                                            <input type="file" class="form-control" name="photo" id="photo-{{ $user->id }}" onchange="previewImageEditVet(event, {{ $user->id }})">
                                         </div>
                                     </div>
                                 </div>
@@ -314,13 +314,13 @@
             reader.readAsDataURL(input.files[0]);
         }
 
-        function previewImageEditShelter(event, shelterId)
+        function previewImageEditVet(event, vetId)
         {
             var input = event.target;
             var reader = new FileReader();
             reader.onload = function() {
                 var dataURL = reader.result;
-                var output = document.getElementById('photo-preview-shelter-' + shelterId);
+                var output = document.getElementById('photo-preview-vet-' + vetId);
                 output.src = dataURL;
                 output.style.display = 'block';
             };

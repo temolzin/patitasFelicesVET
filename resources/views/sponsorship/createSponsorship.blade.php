@@ -1,8 +1,8 @@
-<div class="modal fade" id="createSponsorship{{ $shelterMember->id }}" tabindex="-1" role="dialog" aria-labelledby="createSponsorshipLabel" aria-hidden="true">
+<div class="modal fade" id="createSponsorship{{ $vetMember->id }}" tabindex="-1" role="dialog" aria-labelledby="createSponsorshipLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="{{ route('sponsorship.store') }}" method="POST">
             @csrf
-            <input type="hidden" name="shelter_member_id" value="{{ $shelterMember->id }}">
+            <input type="hidden" name="vet_member_id" value="{{ $vetMember->id }}">
             <div class="modal-content">
                 <div class="card-success">
                     <div class="card-header">
@@ -33,8 +33,8 @@
                                                 @php
                                                 $sponsoredAnimals = [];
                                                 @endphp
-                                                @if(isset($sponsorships[$shelterMember->id]) && count($sponsorships[$shelterMember->id]) > 0)
-                                                @foreach ($sponsorships[$shelterMember->id] as $sponsorship)
+                                                @if(isset($sponsorships[$vetMember->id]) && count($sponsorships[$vetMember->id]) > 0)
+                                                @foreach ($sponsorships[$vetMember->id] as $sponsorship)
                                                 @if (!in_array($sponsorship->animal->id, $sponsoredAnimals))
                                                 <option value="{{ $sponsorship->animal->id }}" {{ old('animal_id') == $sponsorship->animal->id ? 'selected' : '' }}>
                                                     {{ $sponsorship->animal->name }} (Ya apadrinada)

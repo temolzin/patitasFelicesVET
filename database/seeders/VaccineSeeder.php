@@ -16,13 +16,13 @@ class VaccineSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $shelterIds = [1, 2, 3];
+        $vetIds = [1, 2, 3];
         $vaccineTypes = ['Rabies', 'Distemper', 'Parvovirus', 'Hepatitis', 'Leptospirosis'];
 
-        foreach ($shelterIds as $shelterId) {
+        foreach ($vetIds as $vetId) {
             foreach ($vaccineTypes as $vaccineType) {
                 DB::table('vaccines')->insert([
-                    'shelter_id' => $shelterId,
+                    'vet_id' => $vetId,
                     'name' => $vaccineType . ' Vaccine',
                     'type' => $vaccineType,
                     'description' => $faker->paragraph

@@ -1,4 +1,4 @@
-<div class="modal fade" id="createDonation{{$shelterMember->id}}" tabindex="-1" role="dialog"
+<div class="modal fade" id="createDonation{{$vetMember->id}}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -14,7 +14,7 @@
                 </div>
                 <form action="{{ route('donation.store') }}" method="post">
                     @csrf
-                    <input type="hidden" name="shelter_member_id" value="{{ $shelterMember->id }}">
+                    <input type="hidden" name="vet_member_id" value="{{ $vetMember->id }}">
                     <div class="card-body">
                         <div class="card">
                             <div class="card-header py-2 bg-secondary">
@@ -48,7 +48,7 @@
                                                 required>
                                                 <option value="">Seleccione un tipo de donación</option>
                                                 @foreach ($type as $types)
-                                                    <option value="{{ $types }}" {{ old('forms', $shelterMember->types ?? '') == $types ? 'selected' : '' }}>
+                                                    <option value="{{ $types }}" {{ old('forms', $vetMember->types ?? '') == $types ? 'selected' : '' }}>
                                                         {{ $types }}
                                                     </option>
                                                 @endforeach

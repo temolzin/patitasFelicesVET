@@ -14,13 +14,13 @@ class AdoptionController extends Controller
     public function pdfAdoption($id)
     {
         $id = Crypt::decrypt($id);
-        $shelter = Auth::user()->shelter;
+        $vet = Auth::user()->vet;
 
         $adoption = Adoption::where('id', $id)
-            ->with(['animal.specie', 'shelterMember'])
+            ->with(['animal.specie', 'vetMember'])
             ->firstOrFail();
 
-        $pdf = PDF::loadView('adoptions.pdfAdoption', compact('adoption', 'shelter'));
+        $pdf = PDF::loadView('adoptions.pdfAdoption', compact('adoption', 'vet'));
         return $pdf->stream();
     }
 
@@ -28,7 +28,7 @@ class AdoptionController extends Controller
     {
         $request->validate([
             'animal_id' => 'required|exists:animals,id',
-            'shelter_member_id' => 'required|exists:shelter_member,id',
+            'vet_member_id' => 'required|exists:vet_member,id',
             'adoption_date' => 'required|date',
             'observation' => 'nullable|string',
         ]);
@@ -36,13 +36,13 @@ class AdoptionController extends Controller
         $adoption = new Adoption();
 
         $adoption->animal_id = $request->animal_id;
-        $adoption->shelter_member_id = $request->shelter_member_id;
+        $adoption->vet_member_id = $request->vet_member_id;
         $adoption->adoption_date = $request->adoption_date;
         $adoption->observation = $request->observation;
 
         $adoption->save();
 
-        return redirect()->route('shelterMembers.adopter')->with('success', 'Adopción creada exitosamente.');
+        return redirect()->route('vetMembers.adopter')->with('success', 'Adopción creada exitosamente.');
     }
     
     public function destroy($id, Request $request)

@@ -33,61 +33,61 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if(count($shelterMember) <= 0) 
+                                    @if(count($vetMember) <= 0) 
                                         <tr>
                                             <td colspan="8">No hay resultados</td>
                                         </tr>
                                         @else
-                                        @foreach($shelterMember as $shelterMember)
+                                        @foreach($vetMember as $vetMember)
                                         <tr>
-                                            <td scope="row">{{$shelterMember->id}}</td>
+                                            <td scope="row">{{$vetMember->id}}</td>
                                             <td>
-                                                @if($shelterMember->getMedia('photos')->isNotEmpty())
+                                                @if($vetMember->getMedia('photos')->isNotEmpty())
                                                 @php
-                                                $photo = $shelterMember->getFirstMedia('photos');
+                                                $photo = $vetMember->getFirstMedia('photos');
                                                 @endphp
                                                 <img src="{{ $photo->getUrl() }}" alt="Photo not found" style="width: 50px; height: 50px; border-radius: 50%;">
                                                 @else
                                                 <img src="{{ asset('img/avatardefault.png') }}" style="width: 50px; height: 50px; border-radius: 50%;">
                                                 @endif
                                             </td>
-                                            <td>{{$shelterMember->name}} {{$shelterMember->last_name}}</td>
-                                            <td>{{$shelterMember->phone}}</td>
+                                            <td>{{$vetMember->name}} {{$vetMember->last_name}}</td>
+                                            <td>{{$vetMember->phone}}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Opciones">
-                                                    <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{$shelterMember->id}}">
+                                                    <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{$vetMember->id}}">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-warning mr-2" data-toggle="modal" title="Editar Datos" data-target="#edit{{$shelterMember->id}}">
+                                                    <button type="button" class="btn btn-warning mr-2" data-toggle="modal" title="Editar Datos" data-target="#edit{{$vetMember->id}}">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
-                                                     @if($shelterMember->hasDependencies())
+                                                     @if($vetMember->hasDependencies())
                                                             <button type="button" class="btn btn-secondary mr-2" title="Eliminación no permitida: Existen datos relacionados con este registro." disabled>
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </button>
                                                         @else
-                                                            <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $shelterMember->id }}">
+                                                            <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $vetMember->id }}">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </button>
                                                         @endif
-                                                    <button type="button" class="btn btn-success mr-2" data-toggle='modal' title="Registrar Donación" data-target="#createDonation{{$shelterMember->id}}">
+                                                    <button type="button" class="btn btn-success mr-2" data-toggle='modal' title="Registrar Donación" data-target="#createDonation{{$vetMember->id}}">
                                                         <i class="fa fa-dollar-sign"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-secondary mr-2" data-toggle="modal" title="Ver Donaciones" data-target="#indexDonation{{$shelterMember->id}}">
+                                                    <button type="button" class="btn btn-secondary mr-2" data-toggle="modal" title="Ver Donaciones" data-target="#indexDonation{{$vetMember->id}}">
                                                             <i class="fas fa-search-dollar"></i>
                                                         </button>
                                                 </div>
                                             </td>
                                             @include('donations.indexDonation')
-                                            @include('shelterMembers.delete')
+                                            @include('vetMembers.delete')
                                             @include('donations.createDonation')                                      
                                         </tr>
-                                            @include('shelterMembers.view')
-                                            @include('shelterMembers.info')
+                                            @include('vetMembers.view')
+                                            @include('vetMembers.info')
                                         @endforeach
                                         @endif
                                     </tbody>
-                                    @include('shelterMembers.create')
+                                    @include('vetMembers.create')
                                 </table>
                             </div>
                         </div>

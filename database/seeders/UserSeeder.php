@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             'phone' => '7798745677',
             'email' => 'eri@gmail.com',
             'password' => Hash::make('12345'),
-        ])->assignRole('shelter');
+        ])->assignRole('vet');
 
         User::create([
             'name' => 'Maria',
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'phone' => '7798745677',
             'email' => 'maria@gmail.com',
             'password' => Hash::make('12345'),
-        ])->assignRole('shelter');
+        ])->assignRole('vet');
 
         User::create([
             'name' => 'Juan',
@@ -53,6 +53,6 @@ class UserSeeder extends Seeder
             'phone' => '7798745677',
             'email' => 'juan@gmail.com',
             'password' => Hash::make('12345'),
-        ])->assignRole('shelter');
+        ])->assignRole('vet');
     }
 }

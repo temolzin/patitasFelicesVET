@@ -17,15 +17,15 @@ class AnimalController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $shelter = $user->shelter;
-        $shelterId = $shelter->id;
+        $vet = $user->vet;
+        $vetId = $vet->id;
 
         $origins = Animal::ORIGINS;
         $behaviors = Animal::BEHAVIORS;
         $sexes = Animal::SEXES;
-        $animals = Animal::where('shelter_id', $shelterId)->get();
-        $species = Specie::where('shelter_id', $shelterId)->get();
-        $vaccines = Vaccine::where('shelter_id', $shelterId)->get();
+        $animals = Animal::where('vet_id', $vetId)->get();
+        $species = Specie::where('vet_id', $vetId)->get();
+        $vaccines = Vaccine::where('vet_id', $vetId)->get();
         $vaccinatedAnimals = VaccinatedAnimal::whereIn('animal_id', $animals->pluck('id'))
         ->with('vaccines') 
         ->get()
@@ -45,10 +45,10 @@ class AnimalController extends Controller
         $animalId = Crypt::decrypt($animalId);
 
         $user = Auth::user();
-        $shelter = $user->shelter;
-        $shelterId = $shelter->id;
+        $vet = $user->vet;
+        $vetId = $vet->id;
 
-        $animal = Animal::where('shelter_id', $shelterId)->where('id', $animalId)->firstOrFail();
+        $animal = Animal::where('vet_id', $vetId)->where('id', $animalId)->firstOrFail();
 
         $pdf = PDF::loadView('animals.petProfile', compact('animal'));
         return $pdf->stream();
@@ -73,11 +73,11 @@ class AnimalController extends Controller
         ]);
 
         $user = Auth::user();
-        $shelter = $user->shelter;
+        $vet = $user->vet;
 
         $animal = new Animal();
         $animal->specie_id = $request->specie_id;
-        $animal->shelter_id = $shelter->id;
+        $animal->vet_id = $vet->id;
         $animal->name = $request->name;
         $animal->breed = $request->breed;
         $animal->birth_date = $request->birth_date;

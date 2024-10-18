@@ -13,15 +13,15 @@ class SponsorshipController extends Controller
     public function pdfSponsorship($id)
     {
         $id = Crypt::decrypt($id);
-        $shelter = Auth::user()->shelter;
+        $vet = Auth::user()->vet;
 
         $sponsorship = Sponsorship::where('id', $id)
-            ->with(['animal.specie', 'shelterMember'])
+            ->with(['animal.specie', 'vetMember'])
             ->firstOrFail();
 
-        $shelterMember = $sponsorship->shelterMember;
+        $vetMember = $sponsorship->vetMember;
 
-        $pdf = PDF::loadView('sponsorship.pdfSponsorship', compact('sponsorship', 'shelterMember', 'shelter'));
+        $pdf = PDF::loadView('sponsorship.pdfSponsorship', compact('sponsorship', 'vetMember', 'vet'));
         return $pdf->stream();
     }
 
@@ -34,12 +34,12 @@ class SponsorshipController extends Controller
             'payment_date' => 'required|date',
             'amount' => 'required|numeric',
             'observation' => 'required|string|max:255',
-            'shelter_member_id' => 'required|exists:shelter_member,id',
+            'vet_member_id' => 'required|exists:vet_member,id',
         ]);
 
         $sponsorship = new Sponsorship();
         $sponsorship->animal_id = $request->input('animal_id');
-        $sponsorship->shelter_member_id = $request->input('shelter_member_id');
+        $sponsorship->vet_member_id = $request->input('vet_member_id');
         $sponsorship->start_date = $request->input('start_date');
         $sponsorship->finish_date = $request->input('finish_date');
         $sponsorship->payment_date = $request->input('payment_date');

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ShelterSeeder extends Seeder
+class VetSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ShelterSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('shelters')->insert([
+        DB::table('vets')->insert([
             [
                 'user_id' => 4,
                 'name' => 'Xiollin',

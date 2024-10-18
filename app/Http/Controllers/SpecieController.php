@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Specie;
-use App\Models\Shelter;
+use App\Models\Vet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +14,11 @@ class SpecieController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user || !$user->shelter) {
+        if (!$user || !$user->vet) {
             return redirect()->route('login')->with('error', 'Debe iniciar sesión para ver esta página.');
         }
 
-        $shelterId = $user->shelter->id;
+        $vetId = $user->vet->id;
 
         $species = Specie::orderBy('created_at', 'desc')->get();
 
@@ -44,8 +44,8 @@ class SpecieController extends Controller
             return redirect()->route('login')->with('error', 'Debe iniciar sesión para realizar esta acción.');
         }
 
-        $shelter = $user->shelter;
-        if (!$shelter) {
+        $vet = $user->vet;
+        if (!$vet) {
             return redirect()->back()->with('error', 'No se encontró el refugio asociado al usuario.');
         }
 
@@ -60,7 +60,7 @@ class SpecieController extends Controller
 
         $species->name = $request->input('name');
         $species->description = $request->description;
-        $species->shelter_id = $shelter->id;
+        $species->vet_id = $vet->id;
 
         $species->save();
 

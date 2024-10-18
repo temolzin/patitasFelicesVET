@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class ShelterMember extends Model implements HasMedia
+class VetMember extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia,SoftDeletes;
 
-    protected $table = "shelter_member";
+    protected $table = "vet_member";
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'last_name', 'phone', 'email', 'state', 'city', 'colony' . 'address', 'postal_code', 'type_member', 'shelter_id'];
+    protected $fillable = ['name', 'last_name', 'phone', 'email', 'state', 'city', 'colony' . 'address', 'postal_code', 'type_member', 'vet_id'];
     const TYPE_MEMBER_STAFF = 'Personal';
     const TYPE_MEMBER_DONOR = 'Donante';
     const TYPE_MEMBER_GODFATHER = 'Padrino';
@@ -23,24 +23,24 @@ class ShelterMember extends Model implements HasMedia
 
     protected $guarded = [];
 
-    public function shelter()
+    public function vet()
     {
-        return $this->belongsTo(Shelter::class, 'shelter_id');
+        return $this->belongsTo(Vet::class, 'vet_id');
     }
 
     public function sponsorships()
     {
-        return $this->hasMany(Sponsorship::class, 'shelter_member_id');
+        return $this->hasMany(Sponsorship::class, 'vet_member_id');
     }
 
     public function adoptions()
     {
-        return $this->hasMany(Adoption::class, 'shelter_member_id');
+        return $this->hasMany(Adoption::class, 'vet_member_id');
     }
 
     public function donations()
     {
-        return $this->hasMany(Donation::class, 'shelter_member_id');
+        return $this->hasMany(Donation::class, 'vet_member_id');
     }
 
     public function hasDependencies()

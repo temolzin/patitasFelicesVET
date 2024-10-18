@@ -15,7 +15,7 @@
                 <form action="{{ route('sponsorship.destroy', $sponsorship->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <input type="hidden" name="modal_id" value="viewSponsorship{{ $shelterMember->id }}">
+                    <input type="hidden" name="modal_id" value="viewSponsorship{{ $vetMember->id }}">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
             </div>

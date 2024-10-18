@@ -18,11 +18,11 @@ class VetAppointmentSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $shelterIds = [1, 2, 3];
+        $vetIds = [1, 2, 3];
         $reasons = ['Checkup', 'Vaccination', 'Surgery', 'Illness', 'Injury'];
 
-        foreach ($shelterIds as $shelterId) {
-            $animalIds = Animal::where('shelter_id', $shelterId)->pluck('id')->all();
+        foreach ($vetIds as $vetId) {
+            $animalIds = Animal::where('vet_id', $vetId)->pluck('id')->all();
 
             if (empty($animalIds)) {
                 continue;

@@ -1,4 +1,4 @@
-<div class="modal fade" id="delete{{$shelters->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+<div class="modal fade" id="delete{{$vets->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
 aria-hidden="true">
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -8,11 +8,11 @@ aria-hidden="true">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{route('shelters.destroy',$shelters->id)}}" method="post" enctype="multipart/form-data">
+      <form action="{{route('vets.destroy',$vets->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('DELETE')
       <div class="modal-body text-center text-danger">
-    ¿Estás seguro de eliminar el albergue <strong>{{$shelters->name}}?</strong>
+    ¿Estás seguro de eliminar el albergue <strong>{{$vets->name}}?</strong>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

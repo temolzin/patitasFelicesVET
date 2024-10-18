@@ -17,11 +17,11 @@ class CreateSpeciesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('shelter_id');
+            $table->unsignedBigInteger('vet_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('shelter_id')->references('id')->on('shelters')->onDelete('cascade');
+            $table->foreign('vet_id')->references('id')->on('vets')->onDelete('cascade');
         });
     }
 

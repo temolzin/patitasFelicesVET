@@ -12,9 +12,9 @@ class UserProfileController extends Controller
     public function show()
     {
         $user = auth()->user();
-        $shelter = $user->shelter;
+        $vet = $user->vet;
         
-        return view('profiles.users', compact('user', 'shelter'));
+        return view('profiles.users', compact('user', 'vet'));
     }
 
     public function update(Request $request)
@@ -71,18 +71,18 @@ class UserProfileController extends Controller
         return redirect()->route('user.profile')->with('success', 'Imagen de perfil actualizada con éxito.')->with('image_updated', true);
     }
 
-    public function updatePictureShelter(Request $request)
+    public function updatePictureVet(Request $request)
     {
-        $shelterId = $request->input('shelter_id'); 
+        $vetId = $request->input('vet_id'); 
         $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $shelter = User::with('media')->findOrFail($shelterId); 
-        $shelter->clearMediaCollection('shelterGallery');
-        $shelter->addMedia($request->file('photo'))->toMediaCollection('shelterGallery');
+        $vet = User::with('media')->findOrFail($vetId); 
+        $vet->clearMediaCollection('vetGallery');
+        $vet->addMedia($request->file('photo'))->toMediaCollection('vetGallery');
 
-        session(['user' => $shelter->refresh()]); 
+        session(['user' => $vet->refresh()]); 
 
         return redirect()->route('user.profile')->with('success', 'Imagen de perfil actualizada con éxito.')->with('image_updated', true);
     }

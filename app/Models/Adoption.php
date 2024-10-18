@@ -12,7 +12,7 @@ class Adoption extends Model
   
     protected $fillable = [
         'animal_id',
-        'shelter_member_id',
+        'vet_member_id',
         'adoption_date',
         'observation',
     ];
@@ -22,8 +22,8 @@ class Adoption extends Model
         return $this->belongsTo(Animal::class);
     }
 
-    public function shelterMember()
+    public function vetMember()
     {
-        return $this->belongsTo(ShelterMember::class); 
+        return $this->belongsTo(VetMember::class); 
     }
 }

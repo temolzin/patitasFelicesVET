@@ -35,7 +35,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="adopter_name">Nombre del Adoptante:</label>
-                                        <input type="text" class="form-control" value="{{ $adoption->shelterMember->name }} {{ $adoption->shelterMember->last_name }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $adoption->vetMember->name }} {{ $adoption->vetMember->last_name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">

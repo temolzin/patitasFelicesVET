@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\ShelterMember;
+use App\Models\VetMember;
 use Faker\Factory as Faker;
 
-class ShelterMemberSeeder extends Seeder
+class VetMemberSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,11 +17,11 @@ class ShelterMemberSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $shelterId = [1, 2, 3];
+        $vetId = [1, 2, 3];
 
-        foreach ($shelterId as $shelterId) {
+        foreach ($vetId as $vetId) {
             for ($i = 0; $i < 30; $i++) {
-                DB::table('shelter_member')->insert([
+                DB::table('vet_member')->insert([
                     'name' => $faker->firstName,
                     'last_name' => $faker->lastName,
                     'phone' => $faker->phoneNumber,
@@ -31,8 +31,8 @@ class ShelterMemberSeeder extends Seeder
                     'colony' => $faker->streetName,
                     'address' => $faker->address,
                     'postal_code' => $faker->postcode,
-                    'type_member' => $faker->randomElement(ShelterMember::TYPE_MEMBER),
-                    'shelter_id' => $shelterId,
+                    'type_member' => $faker->randomElement(VetMember::TYPE_MEMBER),
+                    'vet_id' => $vetId,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

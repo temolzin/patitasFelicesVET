@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-    <title>Shelters</title>
+    <title>Vets</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="{{ asset('assets_home/layout/styles/layout.css') }}" rel="stylesheet" type="text/css" media="all">
-    <link href="{{ asset('assets_home/layout/styles/shelters.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets_home/layout/styles/vets.css') }}" rel="stylesheet" type="text/css">
     <link rel="icon" href="/AdminLTELogo.png" type="image/x-icon">
 </head>
 
 <body id="top" class="hold-transition layout-top-nav">
     <div class="bgded overlay"
-        style="background-image:url('{{ asset('assets_home/images/backgrounds/background_shelter.jpg') }}');">
+        style="background-image:url('{{ asset('assets_home/images/backgrounds/background_vet.jpg') }}');">
         <div class="wrapper row0">
             <div id="topbar" class="hoc clear">
                 <div class="fl_left">
@@ -37,7 +37,7 @@
                                     <a href="home" class="nav-link home-link">Inicio</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a href="sheltersView" class="nav-link">Albergues</a>
+                                    <a href="vetsView" class="nav-link">Albergues</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/login" class="nav-link">Ingresar</a>
@@ -61,25 +61,25 @@
 
     <div class="wrapper row3">
         <main class="hoc container clear">
-            <section id="shelters" class="group">
+            <section id="vets" class="group">
                 <div class="content">
-                    @foreach ($shelters as $shelter)
-                        <div class="shelter-card">
-                            @if ($shelter->getMedia('logos')->isNotEmpty())
+                    @foreach ($vets as $vet)
+                        <div class="vet-card">
+                            @if ($vet->getMedia('logos')->isNotEmpty())
                                 @php
-                                    $logo = $shelter->getFirstMedia('logos');
+                                    $logo = $vet->getFirstMedia('logos');
                                 @endphp
-                                <img src="{{ $logo->getUrl() }}" alt="{{ $shelter->name }}">
+                                <img src="{{ $logo->getUrl() }}" alt="{{ $vet->name }}">
                             @else
-                                <img src="{{ asset('img/shelterdefault.png') }}" alt="Default logo">
+                                <img src="{{ asset('img/vetdefault.png') }}" alt="Default logo">
                             @endif
-                            <h4>{{ $shelter->name }}</h4>
-                            <p>Teléfono: {{ $shelter->phone }}</p>
-                            @if ($shelter->facebook)
-                                <p><a href="{{ $shelter->facebook }}" target="_blank">Facebook</a></p>
+                            <h4>{{ $vet->name }}</h4>
+                            <p>Teléfono: {{ $vet->phone }}</p>
+                            @if ($vet->facebook)
+                                <p><a href="{{ $vet->facebook }}" target="_blank">Facebook</a></p>
                             @endif
-                            @if ($shelter->tiktok)
-                                <p><a href="{{ $shelter->tiktok }}" target="_blank">TikTok</a></p>
+                            @if ($vet->tiktok)
+                                <p><a href="{{ $vet->tiktok }}" target="_blank">TikTok</a></p>
                             @endif
                         </div>
                     @endforeach
@@ -96,7 +96,7 @@
                 <nav>
                     <ul class="nospace inline pushright uppercase">
                         <li><a href="home">Inicio</a></li>
-                        <li><a href="sheltersView">Albergues</a></li>
+                        <li><a href="vetsView">Albergues</a></li>
                         <li><a href="/login">Ingresar</a></li>
                     </ul>
                 </nav>

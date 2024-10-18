@@ -12,11 +12,11 @@ class DeathController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $shelter = $user->shelter;
-        $shelterId = $shelter->id;
+        $vet = $user->vet;
+        $vetId = $vet->id;
 
-        $animals = Animal::where('shelter_id', $shelterId)->get();
-        $deaths = Death::where('shelter_id', $shelterId)->get();
+        $animals = Animal::where('vet_id', $vetId)->get();
+        $deaths = Death::where('vet_id', $vetId)->get();
 
         return view('deaths.index', compact('deaths', 'animals'));
     }
@@ -37,17 +37,17 @@ class DeathController extends Controller
         ]);
 
         $user = Auth::user();
-        if (!$user || !$user->shelter) {
+        if (!$user || !$user->vet) {
             return redirect()->route('login')->with('error', 'Debe iniciar sesión para realizar esta acción.');
         }
 
-        $shelterId = $user->shelter->id;
+        $vetId = $user->vet->id;
 
         $death = new Death();
         $death->animal_id = $request->input('animal_id');
         $death->date = $request->input('date');
         $death->cause = $request->input('cause');
-        $death->shelter_id = $shelterId;
+        $death->vet_id = $vetId;
 
         $death->save();
 
