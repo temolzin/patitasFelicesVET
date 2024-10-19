@@ -18,6 +18,9 @@ use App\Http\Controllers\RefugeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VaccinatedAnimalController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,6 +101,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('donation',DonationController::class);
 
     Route::resource('vaccinated_animals',VaccinatedAnimalController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('inventories', InventoryController::class);
 
     Route::get('/user/profile', [UserProfileController::class, 'show'])->name('user.profile');
     Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user.update');
@@ -105,4 +111,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/profile/update-picture-shelter', [UserProfileController::class, 'updatePictureShelter'])->name('user.updatePictureShelter');
     Route::post('user/profile/change-password', [UserProfileController::class, 'changePassword'])->name('user.changePassword');
     
+    Route::post('/products/{product}/update-photo', [ProductController::class, 'updatePhoto'])->name('products.updatePhoto');
+    Route::get('/inventory/report', [InventoryController::class, 'inventoryReport'])->name('report.inventory');
+
 });

@@ -385,6 +385,27 @@ return [
             'can'  =>'viewDeaths'
         ],
         [
+            'text' => 'Categorías',
+            'route' => 'category.index',
+            'icon' => 'fas fa-fw fa-list',
+            'icon_color' => 'dark',
+            'can'  =>'category'
+        ],
+        [
+            'text' => 'Productos',
+            'route' => 'products.index',
+            'icon' => 'fa fa-cube',
+            'icon_color' => 'dark',
+            'can' => 'products'
+        ],
+        [
+            'text' => 'Inventarios',
+            'route' => 'inventories.index',
+            'icon' => 'fa fa-book',
+            'icon_color' => 'dark',
+            'can' => 'inventories'
+        ],
+        [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-users',
             'icon_color' => 'dark',
