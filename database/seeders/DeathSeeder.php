@@ -17,11 +17,11 @@ class DeathSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $shelterIds = [1, 2, 3];
+        $vetIds = [1, 2, 3];
         $causes = ['Natural Causes', 'Accident', 'Illness', 'Unknown'];
 
-        foreach ($shelterIds as $shelterId) {
-            $animalIds = Animal::where('shelter_id', $shelterId)->pluck('id')->all();
+        foreach ($vetIds as $vetId) {
+            $animalIds = Animal::where('vet_id', $vetId)->pluck('id')->all();
 
             if (empty($animalIds)) {
                 continue;
@@ -30,7 +30,7 @@ class DeathSeeder extends Seeder
             for ($i = 0; $i < 5; $i++) {
                 DB::table('deaths')->insert([
                     'animal_id' => $faker->randomElement($animalIds),
-                    'shelter_id' => $shelterId,
+                    'vet_id' => $vetId,
                     'date' => $faker->date,
                     'cause' => $faker->randomElement($causes),
                 ]);

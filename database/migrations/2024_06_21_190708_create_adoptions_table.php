@@ -16,14 +16,14 @@ class CreateAdoptionsTable extends Migration
         Schema::create('adoptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('animal_id');
-            $table->unsignedBigInteger('shelter_member_id');
+            $table->unsignedBigInteger('vet_member_id');
             $table->date('adoption_date');
             $table->text('observation');
             $table->timestamps();
             $table->softDeletes();
         
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
-            $table->foreign('shelter_member_id')->references('id')->on('shelter_member')->onDelete('cascade');
+            $table->foreign('vet_member_id')->references('id')->on('vet_member')->onDelete('cascade');
         });
         
     }

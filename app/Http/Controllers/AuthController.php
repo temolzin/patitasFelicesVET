@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Shelter;
+use App\Models\Vet;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -18,9 +18,9 @@ class AuthController extends Controller
             $user = User::find($user->id);
             $isAdmin = $user->roles()->where('id', 1)->exists();
 
-            $isShelter = Shelter::where('user_id', $user->id)->exists();
+            $isVet = Vet::where('user_id', $user->id)->exists();
 
-            if ($isAdmin || $isShelter) {
+            if ($isAdmin || $isVet) {
                 $request->session()->regenerate();
                 return redirect()->intended('dashboard');
             }

@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\ShelterMember;
+use App\Models\VetMember;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSheltermembersTable extends Migration
+class CreateVetmembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateSheltermembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('shelter_member', function (Blueprint $table) {
+        Schema::create('vet_member', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
                 $table->string('last_name');
@@ -25,12 +25,12 @@ class CreateSheltermembersTable extends Migration
                 $table->string('colony');
                 $table->string('address');
                 $table->string('postal_code');
-                $table->enum('type_member', ShelterMember::TYPE_MEMBER)->nullable();
-                $table->unsignedBigInteger('shelter_id');
+                $table->enum('type_member', VetMember::TYPE_MEMBER)->nullable();
+                $table->unsignedBigInteger('vet_id');
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->foreign('shelter_id')->references('id')->on('shelters')->onDelete('cascade');
+                $table->foreign('vet_id')->references('id')->on('vets')->onDelete('cascade');
         });
     }
 
@@ -41,6 +41,6 @@ class CreateSheltermembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shelter_member');
+        Schema::dropIfExists('vet_member');
     }
 }

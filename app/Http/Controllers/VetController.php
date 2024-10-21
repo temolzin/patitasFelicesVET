@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Shelter;
+use App\Models\Vet;
 use Illuminate\Http\Request;
 
-class ShelterController extends Controller
+class VetController extends Controller
 {
     public function index(Request $request)
     {
         $users = User::all();
-        $shelters = Shelter::with('users')->orderBy('created_at', 'desc')->get();
-        $shelters->map(function ($shelter) {
-            $shelter->logo_url = $shelter->getFirstMediaUrl('shelterGallery');
-            return $shelter;
+        $vets = Vet::with('users')->orderBy('created_at', 'desc')->get();
+        $vets->map(function ($vet) {
+            $vet->logo_url = $vet->getFirstMediaUrl('vetGallery');
+            return $vet;
         });
 
-        return view('shelters.index', compact('shelters', 'users'));
+        return view('vets.index', compact('vets', 'users'));
     }
 
     public function list()
     {
-        return Shelter::all();
+        return Vet::all();
     }
 
     public function store(Request $request)
@@ -41,45 +41,45 @@ class ShelterController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
-        $shelter = Shelter::updateOrCreate(
+        $vet = Vet::updateOrCreate(
             ['id' => $request->id],
             $request->only('user_id', 'name', 'phone', 'facebook', 'tiktok', 'state', 'city', 'colony', 'address', 'postal_code')
         );
 
         if ($request->hasFile('logo')) {
-            $shelter->addMediaFromRequest('logo')->toMediaCollection('shelterGallery');
+            $vet->addMediaFromRequest('logo')->toMediaCollection('vetGallery');
         }
 
-        return redirect()->route('shelters.index')->with('success', 'Albergue guardado exitosamente');
+        return redirect()->route('vets.index')->with('success', 'Albergue guardado exitosamente');
     }
 
     public function destroy($id)
     {
-        $shelter = Shelter::findOrFail($id);
-        if ($shelter) {
-            $shelter->clearMediaCollection('shelterGallery');
-            $shelter->delete();
+        $vet = Vet::findOrFail($id);
+        if ($vet) {
+            $vet->clearMediaCollection('vetGallery');
+            $vet->delete();
         }
 
-        return redirect()->route('shelters.index')->with('success', 'Albergue eliminado exitosamente');
+        return redirect()->route('vets.index')->with('success', 'Albergue eliminado exitosamente');
     }
 
     public function get(Request $request)
     {
-        return Shelter::findOrFail($request->id);
+        return Vet::findOrFail($request->id);
     }
 
     public function edit($id)
     {
-        $shelter = Shelter::findOrFail($id);
+        $vet = Vet::findOrFail($id);
         $users = User::all();
-        return view('shelters.edit', compact('shelter', 'users'));
+        return view('vets.edit', compact('vet', 'users'));
     }
 
     public function create()
     {
         $users = User::all();
-        return view('shelters.create', compact('users'));
+        return view('vets.create', compact('users'));
     }
 
     public function update(Request $request, $id)
@@ -98,25 +98,25 @@ class ShelterController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $shelter = Shelter::findOrFail($id);
-        $shelter->fill($request->only('user_id', 'name', 'phone', 'facebook', 'tiktok', 'state', 'city', 'colony', 'address', 'postal_code'));
+        $vet = Vet::findOrFail($id);
+        $vet->fill($request->only('user_id', 'name', 'phone', 'facebook', 'tiktok', 'state', 'city', 'colony', 'address', 'postal_code'));
 
         if ($request->hasFile('logo')) {
-            $shelter->clearMediaCollection('shelterGallery');
-            $shelter->addMediaFromRequest('logo')->toMediaCollection('shelterGallery');
+            $vet->clearMediaCollection('vetGallery');
+            $vet->addMediaFromRequest('logo')->toMediaCollection('vetGallery');
         }
 
-        $shelter->save();
-        return redirect()->route('shelters.index')->with('success', 'Albergue actualizado correctamente');
+        $vet->save();
+        return redirect()->route('vets.index')->with('success', 'Albergue actualizado correctamente');
     }
 
-    public function show(Shelter $shelters)
+    public function show(Vet $vets)
     {
     }
 
-    public function sheltersView()
+    public function vetsView()
     {
-        $shelters = Shelter::all();
-        return view('sheltersView', compact('shelters'));
+        $vets = Vet::all();
+        return view('vetsView', compact('vets'));
     }
 }

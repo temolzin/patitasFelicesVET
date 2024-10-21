@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
-use App\Models\ShelterMember;
+use App\Models\VetMember;
 use App\Models\Animal;
 use App\Models\Donation;
 
@@ -21,10 +21,10 @@ class DonationSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $shelterMembers = ShelterMember::all();
+        $vetMembers = VetMember::all();
 
-        foreach ($shelterMembers as $shelterMember) {
-            $animalIds = Animal::where('shelter_id', $shelterMember->shelter_id)->pluck('id')->all();
+        foreach ($vetMembers as $vetMember) {
+            $animalIds = Animal::where('vet_id', $vetMember->vet_id)->pluck('id')->all();
 
             if (empty($animalIds)) {
                 continue;
@@ -32,7 +32,7 @@ class DonationSeeder extends Seeder
 
             for ($i = 0; $i < 3; $i++) {
                 DB::table('donations')->insert([
-                    'shelter_member_id' => $shelterMember->id,
+                    'vet_member_id' => $vetMember->id,
                     'donation_date' => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'),
                     'type' => $faker->randomElement(Donation::DONATION),
                     'observation' => $faker->paragraph,

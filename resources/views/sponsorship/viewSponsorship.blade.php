@@ -1,4 +1,4 @@
-<div class="modal fade" id="viewSponsorship{{ $sponsorship->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $shelterMember->id }}" aria-hidden="true">
+<div class="modal fade" id="viewSponsorship{{ $sponsorship->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $vetMember->id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="card-info">

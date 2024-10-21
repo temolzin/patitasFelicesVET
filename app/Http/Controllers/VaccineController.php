@@ -13,13 +13,13 @@ class VaccineController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user || !$user->shelter) {
+        if (!$user || !$user->vet) {
             return redirect()->route('login')->with('error', 'Debe iniciar sesión para ver esta página.');
         }
 
-        $shelterId = $user->shelter->id;
+        $vetId = $user->vet->id;
 
-        $vaccines = Vaccine::where('shelter_id', $shelterId)
+        $vaccines = Vaccine::where('vet_id', $vetId)
             ->where(function ($query) use ($request) {
                 $text = trim($request->get('text'));
                 $query->where('vaccine_id', 'LIKE', '%' . $text . '%')
@@ -51,8 +51,8 @@ class VaccineController extends Controller
             return redirect()->route('login')->with('error', 'Debe iniciar sesión para realizar esta acción.');
         }
 
-        $shelter = $user->shelter;
-        if (!$shelter) {
+        $vet = $user->vet;
+        if (!$vet) {
             return redirect()->back()->with('error', 'No se encontró el refugio asociado al usuario.');
         }
 
@@ -68,7 +68,7 @@ class VaccineController extends Controller
         $vaccines->name = $request->input('name');
         $vaccines->type = $request->input('type');
         $vaccines->description = $request->description;
-        $vaccines->shelter_id = $shelter->id;
+        $vaccines->vet_id = $vet->id;
 
         $vaccines->save();
 

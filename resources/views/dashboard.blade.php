@@ -9,7 +9,7 @@
         <div class="right_col" role="main">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
-                    @if ($role->name === 'shelter')
+                    @if ($role->name === 'vet')
                         <div class="row">
                             <div class="container-fluid">
                                 <div class="card-box head">
@@ -57,7 +57,7 @@
                                     <div class="icon">
                                         <i class="fas fa-dollar fa-fw"></i>
                                     </div>
-                                    <a href="{{ route('shelterMembers.godfather') }}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="{{ route('vetMembers.godfather') }}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-xs-6">
@@ -69,7 +69,7 @@
                                     <div class="icon">
                                         <i class="fas fa-hand-holding-heart fa-fw"></i>
                                     </div>
-                                    <a href="{{ route('shelterMembers.adopter') }}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="{{ route('vetMembers.adopter') }}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-xs-6">
@@ -94,7 +94,7 @@
                     @else
                         <section class="content">
                             @php
-                                $totalShelters = $shelters->count();
+                                $totalVets = $vets->count();
                                 $totalUsers = $users->count();
                             @endphp
                             <div class="row">
@@ -134,13 +134,13 @@
                                 <div class="col-lg-4 col-xs-6 p-1">
                                     <div class="small-box bg-success">
                                         <div class="inner">
-                                            <h3>{{ $totalShelters }}</h3>
-                                            <p>Albergues</p>
+                                            <h3>{{ $totalVets }}</h3>
+                                            <p>Veterinarias</p>
                                         </div>
                                         <div class="icon">
                                             <i class="fa fa-home"></i>
                                         </div>
-                                        <a href="{{ route('shelters.index') }}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+                                        <a href="{{ route('vets.index') }}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-xs-6 p-1">
@@ -161,7 +161,7 @@
                                 <div class="col-md-6 p-1">
                                     <div class="card">
                                         <div class="card-header" style="background-color:#0d574c; color:white;">
-                                            <h3 class="card-title">Albergues</h3>
+                                            <h3 class="card-title">Veterinarias</h3>
                                             <div class="card-tools">
                                                 <span class="badge badge-dark">Últimos registros</span>
                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -170,27 +170,27 @@
                                             </div>
                                         </div>
                                         <div class="card-body p-1">
-                                            <ul id="listShelters" class="users-list clearfix">
-                                            @foreach ($shelters as $shelter)
+                                            <ul id="listVets" class="users-list clearfix">
+                                            @foreach ($vets as $vet)
                                             <li class="p-1">
                                                 @php
-                                                    $logo = $shelter->users->getFirstMedia('shelterGallery');
+                                                    $logo = $vet->users->getFirstMedia('vetGallery');
                                                 @endphp
                                                 @if ($logo)
                                                     <img src="{{ $logo->getUrl() }}" 
-                                                    alt="Logo de {{ $shelter->users->name }}" 
+                                                    alt="Logo de {{ $vet->users->name }}" 
                                                     class="rounded-circle img-fluid" style="width: 120px; height: 120px;">
                                                 @else
-                                                    <img src="{{ asset('img/shelterdefault.png') }}" 
+                                                    <img src="{{ asset('img/vetdefault.png') }}" 
                                                     class="rounded-circle img-fluid" style="width: 120px; height: 120px;">
                                                 @endif
-                                                <a class="users-list-name">{{ $shelter->name }}</a>
+                                                <a class="users-list-name">{{ $vet->name }}</a>
                                             </li>
                                             @endforeach
                                             </ul>
                                         </div>
                                         <div class="card-footer text-center">
-                                            <a href="{{ route('shelters.index') }}">Ver Todos</a>
+                                            <a href="{{ route('vets.index') }}">Ver Todos</a>
                                         </div>
                                     </div>
                                 </div>

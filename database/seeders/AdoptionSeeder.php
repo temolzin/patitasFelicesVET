@@ -15,10 +15,10 @@ class AdoptionSeeder extends Seeder
      */
     public function run()
     {
-        $shelterMembers = DB::table('shelter_member')->where('type_member', 'Adoptante')->get();
+        $vetMembers = DB::table('vet_member')->where('type_member', 'Adoptante')->get();
 
-        foreach ($shelterMembers as $member) {
-            $animals = DB::table('animals')->where('shelter_id', $member->shelter_id)->get();
+        foreach ($vetMembers as $member) {
+            $animals = DB::table('animals')->where('vet_id', $member->vet_id)->get();
 
             if ($animals->count() >= 2) {
                 $selectedAnimals = $animals->random(2);
@@ -26,7 +26,7 @@ class AdoptionSeeder extends Seeder
                 foreach ($selectedAnimals as $animal) {
                     DB::table('adoptions')->insert([
                         'animal_id' => $animal->id,
-                        'shelter_member_id' => $member->id,
+                        'vet_member_id' => $member->id,
                         'adoption_date' => Carbon::now()->subDays(rand(0, 365)),
                         'observation' => 'Adopción realizada por ' . $member->name,
                     ]);

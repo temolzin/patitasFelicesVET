@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(ShelterSeeder::class);
+        $this->call(VetSeeder::class);
         $this->call(SpecieSeeder::class);
         $this->call(AnimalSeeder::class);
-        $this->call(ShelterMemberSeeder::class);
+        $this->call(VetMemberSeeder::class);
         $this->call(AdoptionSeeder::class);
         $this->call(VaccineSeeder::class);
         $this->call(VetAppointmentSeeder::class);

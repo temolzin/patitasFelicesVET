@@ -15,23 +15,37 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $roleAdmin = Role::create(['name'=>'admin']);
-        $roleShelter = Role::create(['name'=>'shelter']);
+        $roleAdmin = Role::firstOrCreate(['name' => 'admin']);
+        $roleVet = Role::firstOrCreate(['name' => 'vet']);
 
-        Permission::create(['name' => 'viewDashboard', 'description' => 'ver dashboard'])->syncRoles([$roleAdmin, $roleShelter]);
-        Permission::create(['name' => 'viewUser', 'description' => 'ver usuario'])->assignRole($roleAdmin);
-        Permission::create(['name' => 'viewShelter', 'description' => 'ver albergue'])->assignRole($roleAdmin);
-        Permission::create(['name' => 'viewRol', 'description' => 'ver rol'])->assignRole($roleAdmin);
+        $permissionViewDashboard = Permission::firstOrCreate(['name' => 'viewDashboard', 'description' => 'ver dashboard']);
+        $permissionViewUser = Permission::firstOrCreate(['name' => 'viewUser', 'description' => 'ver usuario']);
+        $permissionViewVet = Permission::firstOrCreate(['name' => 'viewVet', 'description' => 'ver veterinaria']);
+        $permissionViewRol = Permission::firstOrCreate(['name' => 'viewRol', 'description' => 'ver rol']);
+        
+        $permissionViewVaccine = Permission::firstOrCreate(['name' => 'viewVaccine', 'description' => 'ver vacuna']);
+        $permissionViewSpecie = Permission::firstOrCreate(['name' => 'viewSpecie', 'description' => 'ver especie']);
+        $permissionViewAnimal = Permission::firstOrCreate(['name' => 'viewAnimal', 'description' => 'ver animal']);
+        $permissionViewQuotes = Permission::firstOrCreate(['name' => 'viewQuotes', 'description' => 'ver citas']);
+        $permissionViewAdoptions = Permission::firstOrCreate(['name' => 'viewAdoptions', 'description' => 'ver adopciones']);
+        $permissionViewVetUsers = Permission::firstOrCreate(['name' => 'viewVetUsers', 'description' => 'ver usuarios veterinaria']);
+        $permissionViewGodparents = Permission::firstOrCreate(['name' => 'viewGodparents', 'description' => 'ver apadrinamientos']);
+        $permissionViewVetAppointments = Permission::firstOrCreate(['name' => 'viewVetAppointments', 'description' => 'ver citas veterinarias']);
+        $permissionViewDeaths = Permission::firstOrCreate(['name' => 'viewDeaths', 'description' => 'ver fallecimientos']);
 
-        Permission::create(['name' => 'viewVaccine', 'description' => 'ver vacuna'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewSpecie', 'description' => 'ver especie'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewAnimal', 'description' => 'ver animal'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewQuotes', 'description' => 'ver citas'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewAdoptions', 'description' => 'ver adopciones'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewShelterUsers', 'description' => 'ver usuarios albergue'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewGodparents', 'description' => 'ver apadrinamientos'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewVetAppointments', 'description' => 'vercitas veterinarias'])->assignRole($roleShelter);
-        Permission::create(['name' => 'viewDeaths', 'description' => 'ver fallecimientos'])->assignRole($roleShelter);
+        $permissionViewDashboard->syncRoles([$roleAdmin, $roleVet]);
+        $permissionViewUser->assignRole($roleAdmin);
+        $permissionViewVet->assignRole($roleAdmin);
+        $permissionViewRol->assignRole($roleAdmin);
 
+        $permissionViewVaccine->assignRole($roleVet);
+        $permissionViewSpecie->assignRole($roleVet);
+        $permissionViewAnimal->assignRole($roleVet);
+        $permissionViewQuotes->assignRole($roleVet);
+        $permissionViewAdoptions->assignRole($roleVet);
+        $permissionViewVetUsers->assignRole($roleVet);
+        $permissionViewGodparents->assignRole($roleVet);
+        $permissionViewVetAppointments->assignRole($roleVet);
+        $permissionViewDeaths->assignRole($roleVet);
     }
 }

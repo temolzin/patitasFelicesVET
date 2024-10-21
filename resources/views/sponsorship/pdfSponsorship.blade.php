@@ -143,27 +143,27 @@
 <body>
     <div class="container">
         <div class="header">
-            @if ($shelter->getMedia('logos')->isNotEmpty())
+            @if ($vet->getMedia('logos')->isNotEmpty())
             @php
-            $logo = $shelter->getFirstMedia('logos');
+            $logo = $vet->getFirstMedia('logos');
             @endphp
             <img src="{{ $logo->getUrl() }}" alt="Logo not found">
             @else
             <img src='img/avatardefault.png' alt="Logo por defecto">
             @endif
             <div class="details">
-                <p>{{ $shelter->name }}<br>
-                    Teléfono: {{ $shelter->phone }}<br>
-                    Dirección: {{ $shelter->address }}, Col. {{ $shelter->colony }}, C.P. {{ $shelter->postal_code }}, Estado de {{ $shelter->state }} - {{$shelter->city }}
+                <p>{{ $vet->name }}<br>
+                    Teléfono: {{ $vet->phone }}<br>
+                    Dirección: {{ $vet->address }}, Col. {{ $vet->colony }}, C.P. {{ $vet->postal_code }}, Estado de {{ $vet->state }} - {{$vet->city }}
                 </p>
             </div>
         </div>
         <div class="title">Recibo de pago</div>
         <div class="section">
             <div>
-                <span>Nombre del Apadrinador:</span> {{ $sponsorship->shelterMember->name }} {{ $sponsorship->shelterMember->last_name }}<br>
-                <span>Teléfono:</span> {{$shelterMember->phone}}<br>
-                <span>Dirección:</span> {{ $sponsorship->shelterMember->address }}, Col. {{ $sponsorship->shelterMember->colony }}, C.P. {{ $sponsorship->shelterMember->postal_code }}, Estado de {{ $sponsorship->shelterMember->state }} - {{ $sponsorship->shelterMember->city }}
+                <span>Nombre del Apadrinador:</span> {{ $sponsorship->vetMember->name }} {{ $sponsorship->vetMember->last_name }}<br>
+                <span>Teléfono:</span> {{$vetMember->phone}}<br>
+                <span>Dirección:</span> {{ $sponsorship->vetMember->address }}, Col. {{ $sponsorship->vetMember->colony }}, C.P. {{ $sponsorship->vetMember->postal_code }}, Estado de {{ $sponsorship->vetMember->state }} - {{ $sponsorship->vetMember->city }}
             </div>
             <div>
                 <span>ID del Pago:</span> {{ $sponsorship->id }}<br>

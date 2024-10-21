@@ -35,7 +35,7 @@
                                     <a href="home" class="nav-link home-link">Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="sheltersView" class="nav-link">Albergues</a>
+                                    <a href="vetsView" class="nav-link">Veterinarias</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/login" class="nav-link">Ingresar</a>
@@ -94,7 +94,7 @@
                 <li class="one_quarter">
                     <article>
                         <a>
-                            <img src="assets_home/images/shelter.png" alt="" style="margin-bottom: 10px;">
+                            <img src="assets_home/images/vet.png" alt="" style="margin-bottom: 10px;">
                             <h6 class="heading"><a>Administra tu refugio</a></h6>
                             <p>Una vez registrado, podrás acceder y disfrutar de todas las herramientas disponibles para
                                 la
@@ -126,18 +126,18 @@
                     <h6 class="heading underline font-x2">Conoce Nuestros Albergues</h6>
                 </div>
                 <li class="one_third first">
-                    <figure><img src="assets_home/images/shelter1.png" alt="">
-                        <figcaption><a href="sheltersView">Saber más</a></figcaption>
+                    <figure><img src="assets_home/images/vet1.png" alt="">
+                        <figcaption><a href="vetsView">Saber más</a></figcaption>
                     </figure>
                 </li>
                 <li class="one_third">
-                    <figure><img src="assets_home/images/shelter2.jpg" alt="">
-                        <figcaption><a href="sheltersView">Saber más</a></figcaption>
+                    <figure><img src="assets_home/images/vet2.jpg" alt="">
+                        <figcaption><a href="vetsView">Saber más</a></figcaption>
                     </figure>
                 </li>
                 <li class="one_third">
-                    <figure><img src="assets_home/images/shelter3.jpg" alt="">
-                        <figcaption><a href="sheltersView">Saber más</a></figcaption>
+                    <figure><img src="assets_home/images/vet3.jpg" alt="">
+                        <figcaption><a href="vetsView">Saber más</a></figcaption>
                     </figure>
                 </li>
             </ul>
@@ -151,7 +151,7 @@
                 <nav>
                     <ul class="nospace inline pushright uppercase">
                         <li><a href="home">Inicio</a></li>
-                        <li><a href="sheltersView">Albergues</a></li>
+                        <li><a href="vetsView">Veterinarias</a></li>
                         <li><a href="/login">Ingresar</a></li>
                     </ul>
                 </nav>
