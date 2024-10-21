@@ -96,7 +96,7 @@
                 <nav>
                     <ul class="nospace inline pushright uppercase">
                         <li><a href="home">Inicio</a></li>
-                        <li><a href="vetsView">Albergues</a></li>
+                        <li><a href="vetsView">Veterinarias</a></li>
                         <li><a href="/login">Ingresar</a></li>
                     </ul>
                 </nav>

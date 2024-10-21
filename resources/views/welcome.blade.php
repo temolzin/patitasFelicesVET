@@ -35,7 +35,7 @@
                                     <a href="home" class="nav-link home-link">Inicio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="vetsView" class="nav-link">Albergues</a>
+                                    <a href="vetsView" class="nav-link">Veterinarias</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/login" class="nav-link">Ingresar</a>
@@ -151,7 +151,7 @@
                 <nav>
                     <ul class="nospace inline pushright uppercase">
                         <li><a href="home">Inicio</a></li>
-                        <li><a href="vetsView">Albergues</a></li>
+                        <li><a href="vetsView">Veterinarias</a></li>
                         <li><a href="/login">Ingresar</a></li>
                     </ul>
                 </nav>

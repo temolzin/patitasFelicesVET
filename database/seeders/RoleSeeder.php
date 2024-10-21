@@ -15,11 +15,9 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        // Crear roles
         $roleAdmin = Role::firstOrCreate(['name' => 'admin']);
         $roleVet = Role::firstOrCreate(['name' => 'vet']);
 
-        // Crear permisos
         $permissionViewDashboard = Permission::firstOrCreate(['name' => 'viewDashboard', 'description' => 'ver dashboard']);
         $permissionViewUser = Permission::firstOrCreate(['name' => 'viewUser', 'description' => 'ver usuario']);
         $permissionViewVet = Permission::firstOrCreate(['name' => 'viewVet', 'description' => 'ver veterinaria']);
@@ -35,7 +33,6 @@ class RoleSeeder extends Seeder
         $permissionViewVetAppointments = Permission::firstOrCreate(['name' => 'viewVetAppointments', 'description' => 'ver citas veterinarias']);
         $permissionViewDeaths = Permission::firstOrCreate(['name' => 'viewDeaths', 'description' => 'ver fallecimientos']);
 
-        // Asignar permisos a roles
         $permissionViewDashboard->syncRoles([$roleAdmin, $roleVet]);
         $permissionViewUser->assignRole($roleAdmin);
         $permissionViewVet->assignRole($roleAdmin);
