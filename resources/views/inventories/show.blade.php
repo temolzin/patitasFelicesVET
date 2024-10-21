@@ -35,16 +35,16 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <h5>Productos Asociados</h5> <!-- Cambié "Materiales" a "Productos" -->
+                                    <h5>Productos Asociados</h5>
                                     <table id="tableShow" class="table table-bordered table-striped">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>Producto</th> <!-- Cambié "Material" a "Producto" -->
+                                                <th>Producto</th>
                                                 <th>Cantidad</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($inventory->products as $product) <!-- Cambié la relación de "materials" a "products" -->
+                                            @foreach($inventory->products as $product)
                                                 <tr>
                                                     <td>{{ $product->name }}</td>
                                                     <td>{{ $product->pivot->quantity }}</td>

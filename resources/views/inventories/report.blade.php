@@ -16,10 +16,8 @@
                             <option value="disponible">Disponible</option>
                             <option value="no disponible">No disponible</option>
                         </select>
-
                         <label for="startDate" class="form-label">Fecha inicio(*)</label>
                         <input type="date" id="startDate" name="startDate" class="form-control" required placeholder="Ingrese fecha inicio"/>
-
                         <label for="endDate" class="form-label">Fecha fin(*)</label>
                         <input type="date" id="endDate" name="endDate" class="form-control" required placeholder="Ingrese fecha fin"/>
                     </div>
@@ -32,7 +30,6 @@
         </div>
     </div>
 </div>
-
 <style>
     .select2-container .select2-selection--single {
         height: 40px;
@@ -40,7 +37,6 @@
         align-items: center;
     }
 </style>
-
 <script>
     document.getElementById('inventoryReportForm').onsubmit = function(event) {
         event.preventDefault();
@@ -49,7 +45,6 @@
         const inventoryStatus = document.getElementById('inventoryStatus').value;
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
-
         const fullUrl = `${url}?inventoryStatus=${inventoryStatus}&startDate=${startDate}&endDate=${endDate}`;
         window.open(fullUrl, '_blank');
     };

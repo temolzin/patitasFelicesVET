@@ -31,7 +31,8 @@ class InventoryController extends Controller
         $products = $request->input('products');
         $quantities = $request->input('quantities');
 
-        if (empty($products) || empty($quantities)) {
+        if (empty($products) || empty($quantities))
+        {
             return redirect()->back()->withErrors('Debe seleccionar al menos un producto y su cantidad.'); // Cambié materiales a productos
         }
 
@@ -40,7 +41,8 @@ class InventoryController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
-        foreach ($products as $key => $product_id) { 
+        foreach ($products as $key => $product_id)
+        { 
             $inventory->products()->attach($product_id, ['quantity' => $quantities[$key]]);
         }
 
@@ -60,7 +62,8 @@ class InventoryController extends Controller
         $products = $request->input('products');
         $quantities = $request->input('quantities');
 
-        if (empty($products) || empty($quantities)) {
+        if (empty($products) || empty($quantities))
+        {
             return redirect()->back()->withErrors('Debe seleccionar al menos un producto y su cantidad.'); // Cambié materiales a productos
         }
 
@@ -69,7 +72,8 @@ class InventoryController extends Controller
 
         $inventory->products()->detach();
 
-        foreach ($products as $key => $product_id) {
+        foreach ($products as $key => $product_id)
+        {
             $inventory->products()->attach($product_id, ['quantity' => $quantities[$key]]); // Cambié materials a products
         }
 

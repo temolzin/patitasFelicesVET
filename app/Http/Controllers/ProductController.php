@@ -13,7 +13,8 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        if ($request->has('search')) {
+        if ($request->has('search'))
+        {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
@@ -21,7 +22,8 @@ class ProductController extends Controller
             });
         }
 
-        if ($request->has('category_id') && $request->input('category_id') != '') {
+        if ($request->has('category_id') && $request->input('category_id') != '')
+        {
             $query->where('category_id', $request->input('category_id'));
         }
 
@@ -51,7 +53,8 @@ class ProductController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
-        if ($request->hasFile('photo')) {
+        if ($request->hasFile('photo'))
+        {
             $product->addMediaFromRequest('photo')->toMediaCollection('productGallery');
         }
 
@@ -67,7 +70,8 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        if ($product) {
+        if ($product)
+        {
             $product->category_id = $request->input('category_id');
             $product->name = $request->input('name');
             $product->description = $request->input('description');
@@ -96,7 +100,8 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         if ($product) {
-            if ($request->hasFile('photo')) {
+            if ($request->hasFile('photo'))
+            {
                 $product->clearMediaCollection('productGallery');
                 $product->addMediaFromRequest('photo')->toMediaCollection('productGallery');
             }

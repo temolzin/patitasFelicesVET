@@ -83,51 +83,38 @@
 
 <script>
    document.addEventListener('DOMContentLoaded', function() {
+       const productSelect = document.getElementById('product_id');
+       const tableBody = document.querySelector('#productTable tbody');
+
        document.getElementById('addproductBtn').addEventListener('click', function() {
-           const productId = document.getElementById('product_id').value;
+           const productId = productSelect.value;
+           if (!productId) return alert('Por favor seleccione un producto.');
 
-           if (productId !== "") {
-               const productName = document.getElementById('product_id').selectedOptions[0].text;
-               const productDescription = document.getElementById('product_id').selectedOptions[0].getAttribute('data-description');
-               const tableBody = document.querySelector('#productTable tbody');
+           const productName = productSelect.selectedOptions[0].text;
+           const productDescription = productSelect.selectedOptions[0].getAttribute('data-description');
 
-               let existingRow = null;
-               tableBody.querySelectorAll('tr').forEach(row => {
-                   const existingproductId = row.querySelector('input[name="products[]"]').value;
-                   if (existingproductId === productId) {
-                       existingRow = row;
-                   }
-               });
+           const existingRow = Array.from(tableBody.querySelectorAll('tr'))
+               .find(row => row.querySelector('input[name="products[]"]').value === productId);
 
-               if (existingRow) {
-                   const quantityInput = existingRow.querySelector('input[name="quantities[]"]');
-                   quantityInput.value = parseInt(quantityInput.value) + 1;
-               } else {
-                   const newRow = document.createElement('tr');
-                   newRow.innerHTML = `
-                       <td>${productName}<input type="hidden" name="products[]" value="${productId}"></td>
-                       <td>${productDescription}</td>
-                       <td><input type="number" class="form-control" name="quantities[]" min="1" value="1"></td>
-                       <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
-                   `;
-                   tableBody.appendChild(newRow);
-
-                   
-                   newRow.querySelector('.delete-row').addEventListener('click', function() {
-                       newRow.remove();
-                   });
-               }
-
-               
-               document.getElementById('product_id').selectedIndex = 0;
-           } else {
-               alert('Por favor seleccione un producto.');
+           if (existingRow) {
+               const quantityInput = existingRow.querySelector('input[name="quantities[]"]');
+               quantityInput.value = parseInt(quantityInput.value) + 1;
+               return;
            }
+
+           const newRow = document.createElement('tr');
+           newRow.innerHTML = `
+               <td>${productName}<input type="hidden" name="products[]" value="${productId}"></td>
+               <td>${productDescription}</td>
+               <td><input type="number" class="form-control" name="quantities[]" min="1" value="1"></td>
+               <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
+           `;
+           tableBody.appendChild(newRow);
+           newRow.querySelector('.delete-row').addEventListener('click', () => newRow.remove());
+           productSelect.selectedIndex = 0;
        });
    });
 </script>
-
-
 <style>
     #productTable tbody tr:nth-child(odd) {
         background-color: #f2f2f2;
