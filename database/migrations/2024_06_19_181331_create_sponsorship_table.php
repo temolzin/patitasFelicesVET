@@ -16,7 +16,7 @@ class CreateSponsorshipTable extends Migration
         Schema::create('sponsorship', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('animal_id');
-            $table->unsignedBigInteger('shelter_member_id')->nullable();
+            $table->unsignedBigInteger('vet_member_id')->nullable();
             $table->date('start_date')->nullable();
             $table->date('finish_date')->nullable();
             $table->date('payment_date')->nullable();
@@ -26,7 +26,7 @@ class CreateSponsorshipTable extends Migration
             $table->softDeletes();
     
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
-            $table->foreign('shelter_member_id')->references('id')->on('shelter_member')->onDelete('cascade');
+            $table->foreign('vet_member_id')->references('id')->on('vet_member')->onDelete('cascade');
     
         });
     }

@@ -350,11 +350,11 @@ return [
             'can' => 'viewVaccine'
         ],
         [
-            'text' => 'Albergues',
-            'url' => '/shelters',
+            'text' => 'Veterinarias',
+            'url' => '/vets',
             'icon' => 'fa fa-home',
             'icon_color' => 'dark',
-            'can' => 'viewShelter',
+            'can' => 'viewVet',
         ],
         [
             'text' => 'Citas Veterinarias',
@@ -409,7 +409,7 @@ return [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-users',
             'icon_color' => 'dark',
-            'can' => 'viewShelterUsers',
+            'can' => 'viewVetUsers',
             'submenu' => [
                 [
                     'text' => 'Padrino',

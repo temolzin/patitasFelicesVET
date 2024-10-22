@@ -1,10 +1,10 @@
-<div class="modal fade" id="viewAdoptions{{ $shelterMember->id }}" tabindex="-1" aria-labelledby="viewAdoptionsLabel{{ $shelterMember->id }}" aria-hidden="true">
+<div class="modal fade" id="viewAdoptions{{ $vetMember->id }}" tabindex="-1" aria-labelledby="viewAdoptionsLabel{{ $vetMember->id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="card-secondary">
                 <div class="card-header">
                     <div class="d-sm-flex align-items-center justify-content-between">
-                        <h4 class="card-title">Adopciones de {{ $shelterMember->name }} {{ $shelterMember->last_name }}</h4>
+                        <h4 class="card-title">Adopciones de {{ $vetMember->name }} {{ $vetMember->last_name }}</h4>
                         <button type="button" class="close d-sm-inline-block text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-body">
                     @php
-                        $memberAdoptions = $adoptions->where('shelter_member_id', $shelterMember->id);
+                        $memberAdoptions = $adoptions->where('vet_member_id', $vetMember->id);
                     @endphp
                     @if (count($memberAdoptions) <= 0)
                         <p>No hay adopciones para este adoptante.</p>

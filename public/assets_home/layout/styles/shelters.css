@@ -1,5 +1,5 @@
-/* shelters.css */
-#shelters .content {
+/* vets.css */
+#vets .content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -7,7 +7,7 @@
     padding: 40px 20px;
 }
 
-#shelters .shelter-card {
+#vets .vet-card {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -18,29 +18,29 @@
     padding: 20px;
 }
 
-#shelters .shelter-card:hover {
+#vets .vet-card:hover {
     transform: scale(1.05);
 }
 
-#shelters .shelter-card img {
+#vets .vet-card img {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     width: 100%;
     height: auto;
 }
 
-#shelters .shelter-card h4 {
+#vets .vet-card h4 {
     font-size: 1.5em;
     margin: 10px 0;
     color: #444;
 }
 
-#shelters .shelter-card p {
+#vets .vet-card p {
     color: #666;
     margin-bottom: 15px;
 }
 
-#shelters .btn {
+#vets .btn {
     display: inline-block;
     padding: 10px 20px;
     margin: 10px 0;
@@ -52,6 +52,6 @@
     transition: background-color 0.2s;
 }
 
-#shelters .btn:hover {
+#vets .btn:hover {
     background-color: #e05d00;
 }

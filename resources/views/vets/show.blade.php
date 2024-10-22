@@ -1,4 +1,4 @@
-<div class="modal fade" id="view{{ $shelters->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $shelters->id }}" aria-hidden="true">
+<div class="modal fade" id="view{{ $vets->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $vets->id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="card-info">
@@ -24,79 +24,79 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="image-preview-container" style="display: flex; justify-content: center;">
-                                        @if($shelters->getFirstMediaUrl('shelterGallery'))
-                                            <img id="logo-preview-edit-{{ $shelters->id }}" src="{{ $shelters->getFirstMediaUrl('shelterGallery') }}" 
+                                        @if($vets->getFirstMediaUrl('vetGallery'))
+                                            <img id="logo-preview-edit-{{ $vets->id }}" src="{{ $vets->getFirstMediaUrl('vetGallery') }}" 
                                             alt="Logo Actual" 
                                             style="width: 120px; height: 120px; border-radius: 50%;">
                                         @else
-                                            <img src="{{ asset('img/shelterDefault.png') }}" style="width: 120px; height: 120px; border-radius: 50%;">
+                                            <img src="{{ asset('img/vetDefault.png') }}" style="width: 120px; height: 120px; border-radius: 50%;">
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="form-group">
                                         <label>ID</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->id }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->id }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="form-group text-center">
                                         <label>Nombre</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->name }}" style="width: 100%;" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->name }}" style="width: 100%;" />
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <label>Usuario</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->users->name }} {{ $shelters->users->last_name }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->users->name }} {{ $vets->users->last_name }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Teléfono</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->phone }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->phone }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Facebook</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->facebook }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->facebook }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Tiktok</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->tiktok }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->tiktok }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Estado</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->state }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->state }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Ciudad</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->city }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->city }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Colonia</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->colony }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->colony }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Dirección</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->address }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->address }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Código Postal</label>
-                                        <input type="text" disabled class="form-control" value="{{ $shelters->postal_code }}" />
+                                        <input type="text" disabled class="form-control" value="{{ $vets->postal_code }}" />
                                     </div>
                                 </div>
                             </div>

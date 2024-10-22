@@ -1,10 +1,10 @@
-<div class="modal fade" id="indexSponsorship{{ $shelterMember->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="indexSponsorship{{ $vetMember->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="card-secondary">
                 <div class="card-header">
                     <div class="d-sm-flex align-items-center justify-content-between">
-                        <h4 class="card-title">Apadrinamientos de {{ $shelterMember->name }} {{ $shelterMember->last_name }}</h4>
+                        <h4 class="card-title">Apadrinamientos de {{ $vetMember->name }} {{ $vetMember->last_name }}</h4>
                         <button type="button" class="close d-sm-inline-block text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-body">
                     @php
-                    $memberSponsorships = $sponsorships[$shelterMember->id] ?? [];
+                    $memberSponsorships = $sponsorships[$vetMember->id] ?? [];
                     @endphp
                     @if (empty($memberSponsorships))
                     <p>No hay apadrinamientos registrados para este miembro.</p>

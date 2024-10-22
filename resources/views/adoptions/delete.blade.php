@@ -14,10 +14,10 @@
                 <div class="modal-body text-center text-danger">
                     ¿Estás seguro de eliminar la adopción <strong>{{ $adoption->animal->name }}</strong>?
                 </div>
-                <input type="hidden" name="modal_id" value="viewAdoptions{{ $shelterMember->id }}">
+                <input type="hidden" name="modal_id" value="viewAdoptions{{ $vetMember->id }}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeCurrentModal('#deleteAdoption{{$adoption->id}}')">Cancelar</button>
-                    <input type="hidden" name="modal_id" value="viewAdoptions{{ $shelterMember->id }}">
+                    <input type="hidden" name="modal_id" value="viewAdoptions{{ $vetMember->id }}">
                     <button type="submit" class="btn btn-danger">Confirmar</button>
                 </div>
             </form>

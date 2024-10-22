@@ -10,7 +10,7 @@
                         </button>
                     </div>
                 </div>
-                <form action="{{ route('shelterMember.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('vetMember.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="type_member" value="{{ $typeMember }}">
                     <div class="card-body">

@@ -17,7 +17,7 @@ class CreateAnimalsTable extends Migration
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('specie_id');
-            $table->unsignedBigInteger('shelter_id')->nullable();
+            $table->unsignedBigInteger('vet_id')->nullable();
             $table->string('name');
             $table->string('breed')->nullable();
             $table->date('birth_date')->nullable();
@@ -33,7 +33,7 @@ class CreateAnimalsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('specie_id')->references('id')->on('species')->onDelete('cascade');
-            $table->foreign('shelter_id')->references('id')->on('shelters')->onDelete('cascade');
+            $table->foreign('vet_id')->references('id')->on('vets')->onDelete('cascade');
         });
     }
 

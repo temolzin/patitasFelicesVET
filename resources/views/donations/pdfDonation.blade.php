@@ -143,27 +143,27 @@
 <body>
     <div class="container">
         <div class="header">
-            @if ($shelter->getMedia('shelterGallery')->isNotEmpty())
+            @if ($vet->getMedia('vetGallery')->isNotEmpty())
             @php
-            $logo = $shelter->getFirstMedia('shelterGallery');
+            $logo = $vet->getFirstMedia('vetGallery');
             @endphp
             <img src="{{ $logo->getUrl() }}" alt="Logo not found">
             @else
-            <img src='img/shelterdefault.png' alt="Logo por defecto">
+            <img src='img/vetdefault.png' alt="Logo por defecto">
             @endif
             <div class="details">
-                <p>{{ $shelter->name }}<br>
-                    Teléfono: {{ $shelter->phone }}<br>
-                    Dirección: {{ $shelter->address }}, Col. {{ $shelter->colony }}, C.P. {{ $shelter->postal_code }}, Estado de {{ $shelter->state }} - {{$shelter->city }}
+                <p>{{ $vet->name }}<br>
+                    Teléfono: {{ $vet->phone }}<br>
+                    Dirección: {{ $vet->address }}, Col. {{ $vet->colony }}, C.P. {{ $vet->postal_code }}, Estado de {{ $vet->state }} - {{$vet->city }}
                 </p>
             </div>
         </div>
         <div class="title">Recibo de donación</div>
         <div class="section">
             <div>
-            <span>Nombre del Donador:</span> {{ $shelterMember->name }} {{ $shelterMember->last_name }}<br>
-            <span>Teléfono:</span> {{$shelterMember->phone }}<br>
-            <span>Dirección:</span> {{ $shelterMember->address }}, Col. {{ $shelterMember->colony }}, C.P. {{ $shelterMember->postal_code }}, Estado de {{ $shelterMember->state }} - {{ $shelterMember->city }}
+            <span>Nombre del Donador:</span> {{ $vetMember->name }} {{ $vetMember->last_name }}<br>
+            <span>Teléfono:</span> {{$vetMember->phone }}<br>
+            <span>Dirección:</span> {{ $vetMember->address }}, Col. {{ $vetMember->colony }}, C.P. {{ $vetMember->postal_code }}, Estado de {{ $vetMember->state }} - {{ $vetMember->city }}
 
             </div>
             <div>

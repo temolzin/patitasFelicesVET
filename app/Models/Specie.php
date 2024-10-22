@@ -12,12 +12,12 @@ class Specie extends Model
 
     protected $table = "species";
     protected $primaryKey= 'id';
-    protected $fillable=['name','description','shelter_id'];
+    protected $fillable=['name','description','vet_id'];
     protected $guarded= [];
     
-    public function shelter()
+    public function vet()
     {
-        return $this->belongsTo(Shelter::class, 'shelter_id');
+        return $this->belongsTo(Vet::class, 'vet_id');
     }
 
     public function hasDependencies()

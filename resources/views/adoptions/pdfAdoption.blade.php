@@ -91,9 +91,9 @@
 <body>
     <div class="container">
         <div class="header">
-            @if ($shelter->getMedia('shelterGallery')->isNotEmpty())
+            @if ($vet->getMedia('vetGallery')->isNotEmpty())
                 @php
-                    $logo = $shelter->getFirstMedia('shelterGallery');
+                    $logo = $vet->getFirstMedia('vetGallery');
                 @endphp
                 <img src="{{ $logo->getUrl() }}" alt="Logo not found">
             @else
@@ -137,25 +137,25 @@
                 <h3>Datos del adoptante:</h3>
                 <table>
                     <tr>
-                        <td>Nombre: {{ $adoption->shelterMember->name }} {{ $adoption->shelterMember->last_name }}
+                        <td>Nombre: {{ $adoption->vetMember->name }} {{ $adoption->vetMember->last_name }}
                         </td>
-                        <td>Teléfono: {{ $adoption->shelterMember->phone }}</td>
+                        <td>Teléfono: {{ $adoption->vetMember->phone }}</td>
                         <td rowspan="4" class="image">
-                            @if ($adoption->shelterMember->hasMedia('photos'))
-                                <img src="{{ $adoption->shelterMember->getFirstMediaUrl('photos') }}"
-                                    alt="Foto de {{ $adoption->shelterMember->name }}">
+                            @if ($adoption->vetMember->hasMedia('photos'))
+                                <img src="{{ $adoption->vetMember->getFirstMediaUrl('photos') }}"
+                                    alt="Foto de {{ $adoption->vetMember->name }}">
                             @else
                                 <img src='img/avatardefault.png' alt="Foto predeterminada">
                             @endif
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Email: {{ $adoption->shelterMember->email }}</td>
+                        <td colspan="2">Email: {{ $adoption->vetMember->email }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dirección: {{ $adoption->shelterMember->address }} , Col.
-                            {{ $adoption->shelterMember->colony }}, C.P. {{ $adoption->shelterMember->postal_code }},
-                            Estado de {{ $adoption->shelterMember->state }} - {{ $adoption->shelterMember->city }}
+                        <td colspan="2">Dirección: {{ $adoption->vetMember->address }} , Col.
+                            {{ $adoption->vetMember->colony }}, C.P. {{ $adoption->vetMember->postal_code }},
+                            Estado de {{ $adoption->vetMember->state }} - {{ $adoption->vetMember->city }}
                         </td>
                     </tr>
                     <tr>
@@ -212,7 +212,7 @@
                     <tr>
                         <td>
                             Firma del adoptante<br>
-                            {{ $adoption->shelterMember->name }} {{ $adoption->shelterMember->last_name }}
+                            {{ $adoption->vetMember->name }} {{ $adoption->vetMember->last_name }}
                         </td>
                         <td>Firma del rescatista</td>
                     </tr>

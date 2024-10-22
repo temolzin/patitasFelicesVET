@@ -6,8 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SpecieController;
-use App\Http\Controllers\ShelterController;
-use App\Http\Controllers\ShelterMemberController;
+use App\Http\Controllers\VetController;
+use App\Http\Controllers\VetMemberController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\SponsorshipController;
 use App\Http\Controllers\DeathController;
@@ -43,7 +43,7 @@ Route::get('/', function () {
 
 Route::get('home', [HomeController::class, 'index']);
 
-Route::get('sheltersView', [ShelterController::class, 'sheltersView']);
+Route::get('vetsView', [VetController::class, 'vetsView']);
 
 Route::prefix('error')->group(function () {
     Route::get('/404', function () {
@@ -66,11 +66,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/users/{user}/updateRole', [UserController::class, 'updateRole'])->middleware('can:viewUser')->name('users.updateRole');
     Route::put('/users/{id}/updatePassword', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
-    Route::get('/godfather', [ShelterMemberController::class, 'godfatherIndex'])->name('shelterMembers.godfather');
-    Route::get('/adopter', [ShelterMemberController::class, 'adopterIndex'])->name('shelterMembers.adopter');
-    Route::get('/donor', [ShelterMemberController::class, 'donorIndex'])->name('shelterMembers.donor');
-    Route::get('/staff', [ShelterMemberController::class, 'staffIndex'])->name('shelterMembers.staff');
-    Route::resource('shelterMember',ShelterMemberController::class);
+    Route::get('/godfather', [VetMemberController::class, 'godfatherIndex'])->name('vetMembers.godfather');
+    Route::get('/adopter', [VetMemberController::class, 'adopterIndex'])->name('vetMembers.adopter');
+    Route::get('/donor', [VetMemberController::class, 'donorIndex'])->name('vetMembers.donor');
+    Route::get('/staff', [VetMemberController::class, 'staffIndex'])->name('vetMembers.staff');
+    Route::resource('vetMember',VetMemberController::class);
  
     Route::get('/sponsorship/pdfSponsorship/{id}', [SponsorshipController::class, 'pdfSponsorship'])->name('sponsorship.pdfSponsorship');
     Route::resource('sponsorship',SponsorshipController::class);
@@ -83,8 +83,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/vaccines', [VaccineController::class, 'index'])->name('vaccines');
     Route::resource('vaccines', VaccineController::class)->middleware('can:viewVaccine');
 
-    Route::get('/shelters', [ShelterController::class, 'shelters.index'])->name('shelters');
-    Route::resource('shelters', ShelterController::class)->middleware('can:viewShelter');
+    Route::get('/vets', [VetController::class, 'vets.index'])->name('vets');
+    Route::resource('vets', VetController::class)->middleware('can:viewVet');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/profile', [UserProfileController::class, 'show'])->name('user.profile');
     Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user.update');
     Route::post('/user/profile/update-picture', [UserProfileController::class, 'updatePicture'])->name('user.updatePicture');
-    Route::post('/user/profile/update-picture-shelter', [UserProfileController::class, 'updatePictureShelter'])->name('user.updatePictureShelter');
+    Route::post('/user/profile/update-picture-vet', [UserProfileController::class, 'updatePictureVet'])->name('user.updatePictureVet');
     Route::post('user/profile/change-password', [UserProfileController::class, 'changePassword'])->name('user.changePassword');
     Route::post('/products/{product}/update-photo', [ProductController::class, 'updatePhoto'])->name('products.updatePhoto');
     Route::get('/inventory/report', [InventoryController::class, 'inventoryReport'])->name('report.inventory');

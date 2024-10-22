@@ -12,12 +12,12 @@ class Vaccine extends Model
 
     protected $table = "vaccines";
     protected $primaryKey= 'vaccine_id';
-    protected $fillable=['shelter_id','name','type','description'];
+    protected $fillable=['vet_id','name','type','description'];
     protected $guarded= [];
 
-    public function shelter()
+    public function vet()
     {
-        return $this->belongsTo(Shelter::class, 'shelters_id');
+        return $this->belongsTo(Vet::class, 'vets_id');
     }
 
     public function vaccines()

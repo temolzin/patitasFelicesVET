@@ -9,11 +9,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Shelter extends Model implements HasMedia
+class Vet extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $table = 'shelters';
+    protected $table = 'vets';
 
     protected $primaryKey = 'id';
 

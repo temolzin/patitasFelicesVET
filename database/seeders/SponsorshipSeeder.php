@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use App\Models\Animal;
-use App\Models\ShelterMember;
+use App\Models\VetMember;
 
 class SponsorshipSeeder extends Seeder
 {
@@ -18,24 +18,24 @@ class SponsorshipSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $shelterIds = [1, 2, 3];
+        $vetIds = [1, 2, 3];
 
-        foreach ($shelterIds as $shelterId) {
-            $animalIds = Animal::where('shelter_id', $shelterId)->pluck('id')->all();
-            $shelterMemberIds = ShelterMember::where('shelter_id', $shelterId)
+        foreach ($vetIds as $vetId) {
+            $animalIds = Animal::where('vet_id', $vetId)->pluck('id')->all();
+            $vetMemberIds = VetMember::where('vet_id', $vetId)
                                              ->where('type_member', 'Padrino')
                                              ->pluck('id')
                                              ->all();
 
-            if (empty($animalIds) || empty($shelterMemberIds)) {
+            if (empty($animalIds) || empty($vetMemberIds)) {
                 continue;
             }
 
-            foreach ($shelterMemberIds as $shelterMemberId) {
+            foreach ($vetMemberIds as $vetMemberId) {
                 for ($i = 0; $i < 2; $i++) {
                     DB::table('sponsorship')->insert([
                         'animal_id' => $faker->randomElement($animalIds),
-                        'shelter_member_id' => $shelterMemberId,
+                        'vet_member_id' => $vetMemberId,
                         'start_date' => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
                         'finish_date' => $faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
                         'payment_date' => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),

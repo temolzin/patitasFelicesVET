@@ -14,7 +14,7 @@
                 <div class="modal-body text-center text-danger">
                     ¿Estás seguro de eliminar la donación?
                 </div>
-                <input type="hidden" name="modal_id" value="viewDonations{{ $shelterMember->id }}">
+                <input type="hidden" name="modal_id" value="viewDonations{{ $vetMember->id }}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
                         onclick="closeCurrentModal('#deleteDonation{{$donation->id}}')">Cancelar</button>

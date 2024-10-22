@@ -16,7 +16,7 @@ class CreateDonationTable extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shelter_member_id');
+            $table->unsignedBigInteger('vet_member_id');
             $table->datetime('donation_date');
             $table->enum('type', Donation::DONATION)->nullable();
             $table->string('amount');
@@ -24,7 +24,7 @@ class CreateDonationTable extends Migration
             $table->timestamps();
             $table->softDeletes();
            
-            $table->foreign('shelter_member_id')->references('id')->on('shelter_member')->onDelete('cascade');
+            $table->foreign('vet_member_id')->references('id')->on('vet_member')->onDelete('cascade');
 
         });
     }

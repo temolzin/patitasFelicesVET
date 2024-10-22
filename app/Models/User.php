@@ -59,9 +59,9 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    public function shelter()
+    public function vet()
     {
-        return $this->hasOne(Shelter::class, 'user_id');
+        return $this->hasOne(Vet::class, 'user_id');
     }
 
     public function adminlte_image()
@@ -71,9 +71,9 @@ class User extends Authenticatable implements JWTSubject, HasMedia
             return $this->admin_image ? url($this->admin_image) : url('img/avatardefault.png');
         }
 
-        if ($this->hasRole('shelter'))
+        if ($this->hasRole('vet'))
         {
-            return $this->shelter_image ? url($this->shelter_image) : url('img/shelterdefault.png');
+            return $this->vet_image ? url($this->vet_image) : url('img/vetdefault.png');
         }
     }
 
@@ -101,6 +101,6 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     public function hasDependencies()
     {
-        return $this->shelter()->exists();
+        return $this->vet()->exists();
     }
 }

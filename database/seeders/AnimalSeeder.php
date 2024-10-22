@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Animal;
 use App\Models\Specie;
-use App\Models\Shelter;
+use App\Models\Vet;
 use Faker\Factory as Faker;
 
 class AnimalSeeder extends Seeder
@@ -19,10 +19,10 @@ class AnimalSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $shelters = Shelter::pluck('id')->toArray();
+        $vets = Vet::pluck('id')->toArray();
 
-        foreach ($shelters as $shelterId) {
-            $species = Specie::where('shelter_id', $shelterId)->pluck('id')->toArray();
+        foreach ($vets as $vetId) {
+            $species = Specie::where('vet_id', $vetId)->pluck('id')->toArray();
 
             if (empty($species)) {
                 continue;
@@ -31,7 +31,7 @@ class AnimalSeeder extends Seeder
             for ($i = 0; $i < 50; $i++) {
                 Animal::create([
                     'specie_id' => $species[array_rand($species)],
-                    'shelter_id' => $shelterId,
+                    'vet_id' => $vetId,
                     'name' => $faker->word,
                     'breed' => $faker->word,
                     'birth_date' => now()->subYears(rand(1, 10))->format('Y-m-d'),
