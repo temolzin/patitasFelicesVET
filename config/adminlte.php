@@ -378,6 +378,13 @@ return [
             'can'  =>'viewAnimal'
         ],
         [
+            'text' => 'Clientes',
+            'url' => '/clients',
+            'icon' => 'fas fa-address-book fa-fw',
+            'icon_color' => 'dark',
+            'can'  =>'viewClient'
+        ],
+        [
             'text' => 'Fallecimientos',
             'url' => '/deaths',
             'icon' => 'fas fa-fw fa-skull',

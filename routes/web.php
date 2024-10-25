@@ -18,6 +18,7 @@ use App\Http\Controllers\RefugeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VaccinatedAnimalController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\ClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,5 +105,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/profile/update-picture', [UserProfileController::class, 'updatePicture'])->name('user.updatePicture');
     Route::post('/user/profile/update-picture-vet', [UserProfileController::class, 'updatePictureVet'])->name('user.updatePictureVet');
     Route::post('user/profile/change-password', [UserProfileController::class, 'changePassword'])->name('user.changePassword');
+
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/clients/report/{id}', [ClientController::class, 'generateClientReport'])->name('clients.report');
+    Route::get('/clients/{client}/selectPets', [ClientController::class, 'selectPets'])->name('clients.selectPets');
+    Route::put('/clients/{client}/updatePets', [ClientController::class, 'updatePets'])->name('clients.updatePets');
+    Route::resource('clients', ClientController::class);
+
     
 });

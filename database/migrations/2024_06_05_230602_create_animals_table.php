@@ -18,6 +18,7 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('specie_id');
             $table->unsignedBigInteger('vet_id')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->string('name');
             $table->string('breed')->nullable();
             $table->date('birth_date')->nullable();
@@ -44,6 +45,9 @@ class CreateAnimalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animals');
+        Schema::table('animals', function (Blueprint $table) {
+            $table->dropForeign(['client_id']);
+            $table->dropColumn('client_id');
+        });
     }
 }

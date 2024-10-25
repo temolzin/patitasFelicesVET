@@ -26,6 +26,7 @@ class RoleSeeder extends Seeder
         $permissionViewVaccine = Permission::firstOrCreate(['name' => 'viewVaccine', 'description' => 'ver vacuna']);
         $permissionViewSpecie = Permission::firstOrCreate(['name' => 'viewSpecie', 'description' => 'ver especie']);
         $permissionViewAnimal = Permission::firstOrCreate(['name' => 'viewAnimal', 'description' => 'ver animal']);
+        $permissionViewClient = Permission::firstOrCreate(['name' => 'viewClient', 'description' => 'ver cliente']);
         $permissionViewQuotes = Permission::firstOrCreate(['name' => 'viewQuotes', 'description' => 'ver citas']);
         $permissionViewAdoptions = Permission::firstOrCreate(['name' => 'viewAdoptions', 'description' => 'ver adopciones']);
         $permissionViewVetUsers = Permission::firstOrCreate(['name' => 'viewVetUsers', 'description' => 'ver usuarios veterinaria']);
@@ -41,6 +42,7 @@ class RoleSeeder extends Seeder
         $permissionViewVaccine->assignRole($roleVet);
         $permissionViewSpecie->assignRole($roleVet);
         $permissionViewAnimal->assignRole($roleVet);
+        $permissionViewClient->assignRole($roleVet);
         $permissionViewQuotes->assignRole($roleVet);
         $permissionViewAdoptions->assignRole($roleVet);
         $permissionViewVetUsers->assignRole($roleVet);
