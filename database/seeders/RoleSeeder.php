@@ -35,6 +35,7 @@ class RoleSeeder extends Seeder
         $permissionViewProducts = Permission::firstOrCreate(['name' => 'products', 'description' => 'ver productos']);
         $permissionViewInventories = Permission::firstOrCreate(['name' => 'inventories', 'description' => 'ver inventarios']);
         $permissionViewCategories = Permission::firstOrCreate(['name' => 'category', 'description' => 'ver categorias']);
+        $permissionViewServices = Permission::firstOrCreate(['name' => 'services', 'description' => 'ver servicios']);
 
         $permissionViewDashboard->syncRoles([$roleAdmin, $roleVet]);
         $permissionViewUser->assignRole($roleAdmin);
@@ -53,5 +54,6 @@ class RoleSeeder extends Seeder
         $permissionViewProducts->assignRole($roleVet);
         $permissionViewInventories->assignRole($roleVet);
         $permissionViewCategories->assignRole($roleVet);
+        $permissionViewServices->assignRole($roleVet);
     }
 }
