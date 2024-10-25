@@ -1,7 +1,7 @@
 <div class="modal fade" id="view{{ $service->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $service->id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="card-success">
+            <div class="card-info">
                 <div class="card-header">
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <h4 class="card-title">Información del Servicio</h4>
@@ -36,8 +36,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Descripción</label>
-                                        <textarea type="text" disabled class="form-control">{{ $service->description }}</textarea>
+                                        <label>Duración (en minutos)</label>
+                                        <input type="text" disabled class="form-control" value="{{ $service->duration }}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -54,8 +54,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Duración (en minutos)</label>
-                                        <input type="text" disabled class="form-control" value="{{ $service->duration }}" />
+                                        <label>Descripción</label>
+                                        <textarea type="text" disabled class="form-control">{{ $service->description }}</textarea>
                                     </div>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="name" class="form-label">Nombre(*)</label>
                                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Ingresa el nombre del servicio" value="{{ old('name') }}" required/>
@@ -35,11 +35,11 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="description" class="form-label">Descripción(*)</label>
-                                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Ingresa la descripción" required>{{ old('description') }}</textarea>
-                                            @error('description')
+                                            <label for="duration" class="form-label">Duración(*) (en minutos)</label>
+                                            <input type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="Ingresa la duración estimada del servicio" value="{{ old('duration') }}" required/>
+                                            @error('duration')
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -72,11 +72,11 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label for="duration" class="form-label">Duración(*) (en minutos)</label>
-                                            <input type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" placeholder="Ingresa la duración estimada del servicio" value="{{ old('duration') }}" required/>
-                                            @error('duration')
+                                            <label for="description" class="form-label">Descripción(*)</label>
+                                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Ingresa la descripción" required>{{ old('description') }}</textarea>
+                                            @error('description')
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
