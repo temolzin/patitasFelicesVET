@@ -124,7 +124,6 @@
                             @endforeach
                     </div>
                 @endif
-
                 @if ($animal->assignedServices->isEmpty())
                     <div class="section-without-services">
                         <h3>Servicios</h3>

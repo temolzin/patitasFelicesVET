@@ -29,8 +29,8 @@
                                             <th>NOMBRE</th>
                                             <th>COSTO</th>
                                             <th>DESCRIPCIÓN</th>
-                                            <th>DISPONIBILIDAD</th> <!-- Nueva columna -->
-                                            <th>DURACIÓN (min)</th> <!-- Nueva columna -->
+                                            <th>DISPONIBILIDAD</th>
+                                            <th>DURACIÓN (min)</th>
                                             <th>OPCIONES</th>
                                         </tr>
                                     </thead>
@@ -46,8 +46,8 @@
                                             <td>{{$service->name}}</td>
                                             <td>{{$service->cost}}</td>
                                             <td>{{$service->description}}</td>
-                                            <td>{{$service->availability}}</td> <!-- Mostrar disponibilidad -->
-                                            <td>{{$service->duration}}</td> <!-- Mostrar duración -->
+                                            <td>{{$service->availability}}</td>
+                                            <td>{{$service->duration}}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Opciones">
                                                     <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{$service->id}}">

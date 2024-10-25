@@ -59,6 +59,7 @@ class Animal extends Model implements HasMedia
     {
         $this->addMediaCollection('animalGallery')->singleFile();
     }
+    
     public function getAgeAttribute()
     {
         $birthDate = Carbon::parse($this->birth_date);
@@ -104,12 +105,10 @@ class Animal extends Model implements HasMedia
         return $this->hasMany(AssignedService::class, 'animal_id');
     }
     
-
     public function services()
     {
         return $this->hasMany(Service::class, 'animal_id');
     }
-
 
     public function hasDependencies()
     {
