@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="{{ asset('assets_home/layout/styles/layout.css') }}" rel="stylesheet" type="text/css" media="all">
     <link href="{{ asset('assets_home/layout/styles/vets.css') }}" rel="stylesheet" type="text/css">
-    <link rel="icon" href="/AdminLTELogo.png" type="image/x-icon">
+    <link rel="icon" href="img/LogoPatitasFelices.png" type="image/x-icon">
 </head>
 
 <body id="top" class="hold-transition layout-top-nav">
@@ -37,7 +37,7 @@
                                     <a href="home" class="nav-link home-link">Inicio</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a href="vetsView" class="nav-link">Albergues</a>
+                                    <a href="vetsView" class="nav-link">Veterinarias</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/login" class="nav-link">Ingresar</a>
@@ -51,8 +51,8 @@
 
             <div id="pageintro" class="hoc clear">
                 <article class="center">
-                    <h3 class="heading underline">Catálogo de Albergues</h3>
-                    <p>Conoce los albergues que confían en "Patitas Felices" para la gestión y cuidado de sus mascotas.
+                    <h3 class="heading underline">Catálogo de Veterinarias</h3>
+                    <p>Conoce las veterinarias que confían en "Patitas Felices" para la gestión y cuidado de sus mascotas.
                     </p>
                 </article>
             </div>

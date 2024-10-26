@@ -10,6 +10,7 @@ use App\Models\Vaccine;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Service;
 
 class AnimalController extends Controller
 {
@@ -31,7 +32,9 @@ class AnimalController extends Controller
         ->get()
         ->groupBy('animal_id');
 
-        return view('animals.index', compact('animals', 'species','origins', 'behaviors','sexes','vaccines','vaccinatedAnimals'));
+        $services = Service::all();
+
+        return view('animals.index', compact('animals', 'species', 'origins', 'behaviors', 'sexes', 'vaccines', 'vaccinatedAnimals', 'services'));
     }
 
     public function create()
@@ -101,7 +104,8 @@ class AnimalController extends Controller
 
     public function show($id)
     {
-        $animal = Animal::with('vaccinatedAnimals')->find($id); 
+        $animal = Animal::with(['vaccinatedAnimals', 'assignService'])->findOrFail($id);
+        return view('vaccinatedAnimal.show', compact('animal'));
     }
 
     public function edit($id)

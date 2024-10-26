@@ -23,7 +23,7 @@ class ProductsTableSeeder extends Seeder // Cambié el nombre de la clase
                 'created_by' => $faker->numberBetween(1, 3),
                 'name' => $faker->word() . ' ' . $faker->word(),
                 'description' => $faker->sentence(6, true),
-                'status' => $faker->randomElement(['disponible', 'prestado', 'en reparación']), // Estado aleatorio
+                'status' => $faker->randomElement(['disponible', 'prestado', 'en reparación']),
                 'amount' => $faker->numberBetween(1, 20),
                 'created_at' => now(),
                 'updated_at' => now(),

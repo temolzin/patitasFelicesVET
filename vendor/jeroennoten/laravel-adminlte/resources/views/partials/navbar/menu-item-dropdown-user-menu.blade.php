@@ -34,12 +34,12 @@
         @if(!View::hasSection('usermenu_header') && config('adminlte.usermenu_header'))
             <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
                 @if(!config('adminlte.usermenu_image')) h-auto @endif">
-                @if(Auth::check() && Auth::user()->shelter) 
-                    @if(Auth::user()->getFirstMediaUrl('shelterGallery'))
-                        <img src="{{ Auth::user()->getFirstMediaUrl('shelterGallery') }}"
-                    alt="Foto de {{ Auth::user()->shelter->name }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
+                @if(Auth::check() && Auth::user()->vet) 
+                    @if(Auth::user()->getFirstMediaUrl('vetGallery'))
+                        <img src="{{ Auth::user()->getFirstMediaUrl('vetGallery') }}"
+                    alt="Foto de {{ Auth::user()->vet->name }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
                     @else
-                        <img src="{{ asset('img/shelterdefault.png') }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
+                        <img src="{{ asset('img/vetdefault.png') }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
                     @endif
                 @else
                     @if(Auth::user()->getFirstMediaUrl('userGallery'))
@@ -50,7 +50,7 @@
                     @endif
                 @endif
                 <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif" style="margin-top: 18px;">
-                    {{ Auth::user()->shelter ? Auth::user()->shelter->name : 'Admin' }}
+                    {{ Auth::user()->vet ? Auth::user()->vet->name : 'Admin' }}
                     @if(config('adminlte.usermenu_desc'))
                         <small>{{ Auth::user()->adminlte_desc() }}</small>
                     @endif
