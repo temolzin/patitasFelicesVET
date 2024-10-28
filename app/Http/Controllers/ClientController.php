@@ -51,13 +51,9 @@ class ClientController extends Controller
                 $animal->save(); 
             }
         }
-    
         return redirect()->route('clients.index')->with('success', 'Mascotas asignadas correctamente.');
     }
 
-    /**
-     * Show the form for creating a new client.
-     */
     public function create()
     {
         $animals = Animal::all();
@@ -65,9 +61,6 @@ class ClientController extends Controller
         return view('clients.create', compact('animals'));
     }
 
-    /**
-     * Store a newly created client in the database.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -91,9 +84,6 @@ class ClientController extends Controller
         return redirect()->route('clients.index')->with('success', 'Cliente creado exitosamente y mascotas asignadas.');
     }
 
-    /**
-     * Show the form for editing the specified client.
-     */
     public function edit($id)
     {
         $client = Client::findOrFail($id);
@@ -102,9 +92,6 @@ class ClientController extends Controller
         return view('clients.edit', compact('client', 'animals'));
     }
 
-    /**
-     * Update the specified client in the database.
-     */
     public function update(Request $request, $id)
     {
         $data = $request->validate([
@@ -138,10 +125,6 @@ class ClientController extends Controller
         return view('clients.client_report', compact('client'));
     }
 
-
-    /**
-     * Remove the specified client from the database.
-     */
     public function destroy($id)
     {
         $client = Client::find($id);
@@ -149,5 +132,4 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index')->with('success', 'Cliente eliminado exitosamente.');
     }
-
 }

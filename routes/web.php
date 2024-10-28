@@ -111,6 +111,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/clients/{client}/selectPets', [ClientController::class, 'selectPets'])->name('clients.selectPets');
     Route::put('/clients/{client}/updatePets', [ClientController::class, 'updatePets'])->name('clients.updatePets');
     Route::resource('clients', ClientController::class);
-
-    
 });

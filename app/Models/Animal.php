@@ -99,7 +99,6 @@ class Animal extends Model implements HasMedia
         return $this->belongsTo(Client::class);
     }
 
-
     public function hasDependencies()
     {
         return $this->sponsorships()->exists() || 

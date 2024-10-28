@@ -37,7 +37,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="last_name" class="form-label">Apellido(*)</label>
@@ -51,14 +50,12 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="number_pets" class="form-label">Número de Mascotas</label>
                                             <input type="number" class="form-control" id="number_pets" name="number_pets" value="0" />
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="phone" class="form-label">Teléfono(*)</label>
@@ -72,7 +69,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="email" class="form-label">Correo Electrónico(*)</label>
@@ -86,7 +82,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="state" class="form-label">Estado(*)</label>
@@ -100,7 +95,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="city" class="form-label">Ciudad(*)</label>
@@ -114,7 +108,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="colony" class="form-label">Colonia</label>
@@ -128,7 +121,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="address" class="form-label">Dirección(*)</label>
@@ -142,7 +134,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="postal_code" class="form-label">Código Postal(*)</label>
@@ -156,7 +147,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="observations" class="form-label">Observaciones</label>
@@ -169,7 +159,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>

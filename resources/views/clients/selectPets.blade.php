@@ -18,19 +18,19 @@
         <a href="{{ route('clients.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+@endsection
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const selectElement = document.getElementById('pets');
-    const maxPets = 3; // Cambia este valor si es necesario
+    const maxPets = 3; 
 
     selectElement.addEventListener('change', function() {
         const selectedOptions = Array.from(selectElement.selectedOptions).length;
         if (selectedOptions > maxPets) {
             alert('No puedes seleccionar más de ' + maxPets + ' mascotas.');
-            selectElement.value = ''; // Resetea la selección
+            selectElement.value = '';
         }
     });
 });
 </script>
-@endsection
