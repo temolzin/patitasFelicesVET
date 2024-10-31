@@ -69,19 +69,7 @@
                     <p><strong>Colonia:</strong> {{ $client->colony }}</p>
                     <p><strong>Dirección:</strong> {{ $client->address }}</p>
                     <p><strong>Código Postal:</strong> {{ $client->postal_code }}</p>
-                </div>
-                <div class="section">
-                    <h3>Mascotas Asignadas</h3>
-                    @if($client->pets && $client->pets->isNotEmpty())
-                        <ul>
-                            @foreach($client->pets as $pet)
-                                <li>{{ $pet->name }}</li> 
-                            @endforeach
-                        </ul>
-                    @else
-                        <p>No hay mascotas asignadas a este cliente.</p>
-                    @endif
-                </div>                
+                </div>       
             </div>
         </div>
     </div>

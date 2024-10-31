@@ -385,6 +385,13 @@ return [
             'can'  =>'viewClient'
         ],
         [
+            'text' => 'Productos',
+            'url' => '/products',
+            'icon' => 'fas fa-box-open fa-fw',
+            'icon_color' => 'dark',
+            'can'  =>'viewProduct'
+        ],
+        [
             'text' => 'Fallecimientos',
             'url' => '/deaths',
             'icon' => 'fas fa-fw fa-skull',

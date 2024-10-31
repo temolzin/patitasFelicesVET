@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'PatitasFelices | Clientes')
+@section('title', 'PatitasFelices | Productos')
 
 @section('content')
     <section class="content">
@@ -8,11 +8,11 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Clientes</h2>
+                        <h2>Productos</h2>
                         <div class="row">
                             <div class="col-lg-12 text-right">
-                                <button class="btn btn-success" data-toggle='modal' data-target="#create"> <i
-                                        class="fa fa-edit"></i> Registrar Cliente</button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#create"> <i
+                                        class="fa fa-edit"></i> Registrar Producto</button>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -21,58 +21,61 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="clients" class="table table-striped display responsive nowrap"
+                                    <table id="products" class="table table-striped display responsive nowrap"
                                         style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>NOMBRE</th>
-                                                <th>APELLIDO</th>
-                                                <th>TELÉFONO</th>
-                                                <th>CORREO</th>
-                                                <th>CIUDAD</th>
-                                                <th>MASCOTAS</th>
+                                                <th>DESCRIPCIÓN</th>
+                                                <th>PRECIO</th>
+                                                <th>STOCK</th>
+                                                <th>CATEGORÍA</th>
+                                                <th>ESTADO</th>
                                                 <th>OPCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (count($clients) <= 0)
+                                            @if (count($products) <= 0)
                                                 <tr>
                                                     <td colspan="8">No hay resultados</td>
                                                 </tr>
                                             @else
-                                                @foreach ($clients as $client)
+                                                @foreach ($products as $product)
                                                     <tr>
-                                                        <td scope="row">{{ $client->id }}</td>
-                                                        <td>{{ $client->name }}</td>
-                                                        <td>{{ $client->last_name }}</td>
-                                                        <td>{{ $client->phone }}</td>
-                                                        <td>{{ $client->email }}</td>
-                                                        <td>{{ $client->city }}</td>
-                                                        <td>{{ $client->number_pets }}</td>
+                                                        <td>{{ $product->id }}</td>
+                                                        <td>{{ $product->name }}</td>
+                                                        <td>{{ $product->description }}</td>
+                                                        <td>{{ $product->price }}</td>
+                                                        <td>{{ $product->stock }}</td>
+                                                        <td>{{ $product->category }}</td>
+                                                        <td>{{ $product->is_active ? 'Activo' : 'Inactivo' }}</td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Opciones">
-                                                                <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{ $client->id }}">
+                                                                <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{ $product->id }}">
                                                                     <i class="fas fa-eye"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-warning mr-2" data-toggle="modal" title="Editar Datos" data-target="#edit{{ $client->id }}">
+                                                                <button type="button" class="btn btn-warning mr-2" data-toggle="modal" title="Editar Datos" data-target="#delete{{ $product->id }}">
                                                                     <i class="fas fa-edit"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $client->id }}">
+                                                                <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $product->id }}">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </button>
-                                                                <a href="{{ route('clients.report', Crypt::encrypt($client->id)) }}" class="btn btn-primary">Generar Reporte</a>
-                                                                @include('clients.delete')
+                                                                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" title="Comprar Producto" data-target="#buy{{ $product->id }}">
+                                                                    <i class="fas fa-shopping-cart"></i> Comprar
+                                                                </button>                                                             
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @include('clients.show')
-                                                    @include('clients.edit')
+                                                    @include('products.delete')
+                                                    @include('products.buy')
+                                                    @include('products.show')
+                                                    @include('products.edit')
                                                 @endforeach
                                             @endif
                                         </tbody>
                                     </table>
-                                    @include('clients.create')
+                                    @include('products.create')
                                 </div>
                             </div>
                         </div>
@@ -86,9 +89,9 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#clients').DataTable({
+            $('#products').DataTable({
                 responsive: true,
-                order:[0, 'desc'],
+                order: [0, 'desc'],
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 dom: 'Bfrtip',
             });

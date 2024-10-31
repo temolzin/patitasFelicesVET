@@ -19,6 +19,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VaccinatedAnimalController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,4 +113,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/clients/{client}/selectPets', [ClientController::class, 'selectPets'])->name('clients.selectPets');
     Route::put('/clients/{client}/updatePets', [ClientController::class, 'updatePets'])->name('clients.updatePets');
     Route::resource('clients', ClientController::class);
+
+    Route::resource('products', ProductController::class);
+    Route::post('/products/{product}/buy', [ProductController::class, 'buy'])->name('products.buy');
+
 });

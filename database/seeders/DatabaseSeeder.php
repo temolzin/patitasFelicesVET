@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\ProductSeeder as SeedersProductSeeder;
 use Illuminate\Database\Seeder;
+use ProductSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DeathSeeder::class);
         $this->call(SponsorshipSeeder::class);
         $this->call(DonationSeeder::class);
+        $this->call(SeedersProductSeeder::class);
     }
 }
