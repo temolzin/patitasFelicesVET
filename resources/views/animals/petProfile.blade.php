@@ -44,32 +44,37 @@
             font-size: 1.1em;
             text-align: justify;
         }
-        .section-without-vaccines h3 {
+        .section-without-vaccines h3,
+        .section-without-services h3 {
             margin-bottom: 10px;
             font-size: 1.8em;
             border-bottom: 3px solid #00796b;
             padding-bottom: 5px;
             color: #00796b;
         }
-        .section-without-vaccines p {
+        .section-without-vaccines p,
+        .section-without-services p {
             margin: 9px 0;
             font-size: 1.1em;
             text-align: justify;
         }
-        .section-with-vaccines h3 {
+        .section-with-vaccines h3,
+        .section-with-services h3 {
             margin-bottom: 10px;
             font-size: 1.8em;
             border-bottom: 3px solid #00796b;
             padding-bottom: 5px;
             color: #00796b;
         }
-        .section-with-vaccines p {
+        .section-with-vaccines p,
+        .section-with-services p {
             margin: 10px 0;
             font-size: 1.1em;
             text-align: justify;
         }
-
-        
+        .page-break {
+            page-break-before: always; /* Asegura que esta sección comience en una nueva página */
+        }
     </style>
 </head>
 
@@ -104,6 +109,7 @@
                     <h3>Historia</h3>
                     <p>{{ $animal->history }}</p>
                 </div>
+                <div class="page-break"></div>
                 @if ($animal->vaccinatedAnimals->isEmpty())
                     <div class="section-without-vaccines">
                         <h3>Vacunas</h3>
@@ -116,6 +122,21 @@
                                 <p><strong>Fecha de aplicación: </strong> {{ $vaccinatedAnimal->application_date }}</p>
                                 <p><strong>Vacuna aplicada: </strong> {{ $vaccinatedAnimal->vaccines->name }}</p>
                             @endforeach
+                    </div>
+                @endif
+                @if ($animal->assignedServices->isEmpty())
+                    <div class="section-without-services">
+                        <h3>Servicios</h3>
+                        <p>No hay servicios registrados.</p>
+                    </div>
+                @else
+                    <div class="section-with-services">
+                        <h3>Servicios</h3>
+                        @foreach ($animal->assignedServices as $assignService)
+                            <p><strong>Nombre del servicio:</strong> {{ $assignService->service->name }}</p>
+                            <p><strong>Fecha del servicio:</strong> {{ $assignService->service_date }}</p>
+                            <p><strong>Costo:</strong> {{ $assignService->service->cost }}</p>
+                        @endforeach
                     </div>
                 @endif
             </div>

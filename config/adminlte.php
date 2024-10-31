@@ -378,6 +378,13 @@ return [
             'can'  =>'viewAnimal'
         ],
         [
+            'text' => 'Servicios',
+            'route' => 'services.index',
+            'icon' => 'fa fa-briefcase',
+            'icon_color' => 'dark',
+            'can'  =>'services'
+        ],
+        [
             'text' => 'Clientes',
             'url' => '/clients',
             'icon' => 'fas fa-address-book fa-fw',
@@ -390,6 +397,27 @@ return [
             'icon' => 'fas fa-fw fa-skull',
             'icon_color' => 'dark',
             'can'  =>'viewDeaths'
+        ],
+        [
+            'text' => 'Categorías',
+            'route' => 'category.index',
+            'icon' => 'fas fa-fw fa-list',
+            'icon_color' => 'dark',
+            'can'  =>'category'
+        ],
+        [
+            'text' => 'Productos',
+            'route' => 'products.index',
+            'icon' => 'fa fa-cube',
+            'icon_color' => 'dark',
+            'can' => 'products'
+        ],
+        [
+            'text' => 'Inventarios',
+            'route' => 'inventories.index',
+            'icon' => 'fa fa-book',
+            'icon_color' => 'dark',
+            'can' => 'inventories'
         ],
         [
             'text' => 'Usuarios',

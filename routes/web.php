@@ -19,6 +19,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VaccinatedAnimalController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AssignedServiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,7 +103,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/donations/pdfDonation/{id}', [DonationController::class, 'pdfDonation'])->name('donations.pdfDonation');
     Route::resource('donation',DonationController::class);
 
+    Route::resource('service_animals',AssignedServiceController::class);
     Route::resource('vaccinated_animals',VaccinatedAnimalController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('inventories', InventoryController::class);
+    Route::resource('services', ServiceController::class);
 
     Route::get('/user/profile', [UserProfileController::class, 'show'])->name('user.profile');
     Route::put('/user/profile', [UserProfileController::class, 'update'])->name('user.update');
@@ -111,4 +121,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/clients/{client}/selectPets', [ClientController::class, 'selectPets'])->name('clients.selectPets');
     Route::put('/clients/{client}/updatePets', [ClientController::class, 'updatePets'])->name('clients.updatePets');
     Route::resource('clients', ClientController::class);
+    
 });

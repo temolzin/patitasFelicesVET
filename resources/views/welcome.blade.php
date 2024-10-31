@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="assets_home/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="icon" href="/AdminLTELogo.png" type="image/x-icon">
+    <link rel="icon" href="/img/LogoPatitasFelices.png" type="image/x-icon">
 </head>
 
 <body id="top" class="hold-transition layout-top-nav">
@@ -61,7 +61,7 @@
             <!-- main body -->
             <div class="center btmspace-80">
                 <h6 class="heading underline font-x2">Comunícate con nosotros</h6>
-                <p>"Patitas Felices te ofrece una solución integral para la gestión de albergues de animales. Comunícate
+                <p>"Patitas Felices te ofrece una solución integral para la gestión de veterinarias. Comunícate
                     con nuestro equipo hoy mismo para descubrir cómo podemos ayudarte a optimizar tus operaciones y
                     brindar un mejor cuidado a tus huéspedes peludos."</p>
             </div>
@@ -71,10 +71,10 @@
                         <a>
                             <img src="assets_home/images/contact_us.png" alt="" style="margin-bottom: 10px;">
                             <h6 class="heading"><a>Contáctanos</a></h6>
-                            <p>¿Interesado en mejorar la eficiencia y el cuidado en tu albergue de animales?
+                            <p>¿Interesado en mejorar la eficiencia y el cuidado en tu veterinaria?
                                 ¡Contáctanos
                                 ahora para obtener más información sobre cómo Patitas Felices puede ayudarte a
-                                administrar tu albergue de manera más efectiva y profesional&hellip;</p>
+                                administrar tu veterinaria de manera más efectiva y profesional&hellip;</p>
                         </a>
                     </article>
                 </li>
@@ -84,7 +84,7 @@
                             <img src="assets_home/images/register.png" alt="" style="margin-bottom: 10px;">
                             <h6 class="heading"><a>Te registramos</a></h6>
                             <p>Deja que Patitas Felices se encargue completamente del proceso de registro de tu
-                                albergue.
+                                veterinaria.
                                 Con un simple paso, estarás listo para ingresar y administrarlo de manera eficiente,
                                 amorosa
                                 y exitosa. Regístrate ahora mismo y comienza a ayudar&hellip;</p>
@@ -98,7 +98,7 @@
                             <h6 class="heading"><a>Administra tu refugio</a></h6>
                             <p>Una vez registrado, podrás acceder y disfrutar de todas las herramientas disponibles para
                                 la
-                                administración óptima de tu albergue. ¡Comienza a administrar tu albergue de manera
+                                administración óptima de tu veterinaria. ¡Comienza a administrar tu veterinaria de manera
                                 eficiente y profesional con Patitas Felices!&hellip;</p>
                         </a>
                     </article>
@@ -123,7 +123,7 @@
         <section class="hoc container clear">
             <ul class="nospace group figures btmspace-80">
                 <div class="center btmspace-80">
-                    <h6 class="heading underline font-x2">Conoce Nuestros Albergues</h6>
+                    <h6 class="heading underline font-x2">Conoce Nuestras Veterinarias</h6>
                 </div>
                 <li class="one_third first">
                     <figure><img src="assets_home/images/vet1.png" alt="">

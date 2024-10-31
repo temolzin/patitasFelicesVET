@@ -18,6 +18,30 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 {
     use Notifiable, HasRoles, InteractsWithMedia, SoftDeletes;
 
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        
+        if (!$user)
+        {
+            return redirect()->route('login')->with('error', 'Debe iniciar sesión para ver esta página.');
+        }
+        
+        $animalIds = $user->animals()->pluck('id');
+
+        $services = Service::whereIn('animal_id', $animalIds)
+            ->where(function ($query) use ($request) {
+                $text = trim($request->get('text'));
+                if ($text) {
+                    $query->where('name', 'LIKE', '%' . $text . '%');
+                }
+            })
+            ->orderBy('name', 'desc')
+            ->paginate(10);
+            
+            return view('services.index', compact('services'));
+        }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -102,5 +126,10 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     public function hasDependencies()
     {
         return $this->vet()->exists();
+    }
+
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
     }
 }

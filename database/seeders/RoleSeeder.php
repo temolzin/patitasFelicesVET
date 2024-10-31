@@ -33,6 +33,10 @@ class RoleSeeder extends Seeder
         $permissionViewGodparents = Permission::firstOrCreate(['name' => 'viewGodparents', 'description' => 'ver apadrinamientos']);
         $permissionViewVetAppointments = Permission::firstOrCreate(['name' => 'viewVetAppointments', 'description' => 'ver citas veterinarias']);
         $permissionViewDeaths = Permission::firstOrCreate(['name' => 'viewDeaths', 'description' => 'ver fallecimientos']);
+        $permissionViewProducts = Permission::firstOrCreate(['name' => 'products', 'description' => 'ver productos']);
+        $permissionViewInventories = Permission::firstOrCreate(['name' => 'inventories', 'description' => 'ver inventarios']);
+        $permissionViewCategories = Permission::firstOrCreate(['name' => 'category', 'description' => 'ver categorias']);
+        $permissionViewServices = Permission::firstOrCreate(['name' => 'services', 'description' => 'ver servicios']);
 
         $permissionViewDashboard->syncRoles([$roleAdmin, $roleVet]);
         $permissionViewUser->assignRole($roleAdmin);
@@ -49,5 +53,9 @@ class RoleSeeder extends Seeder
         $permissionViewGodparents->assignRole($roleVet);
         $permissionViewVetAppointments->assignRole($roleVet);
         $permissionViewDeaths->assignRole($roleVet);
+        $permissionViewProducts->assignRole($roleVet);
+        $permissionViewInventories->assignRole($roleVet);
+        $permissionViewCategories->assignRole($roleVet);
+        $permissionViewServices->assignRole($roleVet);
     }
 }

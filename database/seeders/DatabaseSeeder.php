@@ -26,5 +26,10 @@ class DatabaseSeeder extends Seeder
         $this->call(DeathSeeder::class);
         $this->call(SponsorshipSeeder::class);
         $this->call(DonationSeeder::class);
+        $this->call(CategoryTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
+        $this->call(InventoriesTableSeeder::class);
+        $this->call(InventoryProductsTableSeeder::class);
+        $this->call(ServicesTableSeeder::class);
     }
 }
