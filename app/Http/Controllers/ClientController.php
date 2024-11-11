@@ -18,8 +18,8 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        
-        $pets = Animal::where('client_id', null)->get();
+        $pets = Animal::all();
+
         return view('clients.index', compact('clients', 'pets'));
     }
 
