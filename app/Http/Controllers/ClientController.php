@@ -18,8 +18,9 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
+        $pets = Animal::all();
 
-        return view('clients.index', compact('clients'));
+        return view('clients.index', compact('clients', 'pets'));
     }
 
     public function generateClientReport($clientId)

@@ -61,14 +61,19 @@
                                                                 <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $client->id }}">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </button>
-                                                                <a href="{{ route('clients.report', Crypt::encrypt($client->id)) }}" class="btn btn-primary">Generar Reporte</a>
-                                                                <a href="{{ route('clients.selectPets', $client->id) }}" class="btn btn-info">Seleccionar Mascotas</a>
-                                                                @include('clients.delete')
+                                                                <button type="button" class="btn btn-primary mr-2" title="Generar Reporte" onclick="window.location.href='{{ route('clients.report', Crypt::encrypt($client->id)) }}'">
+                                                                    <i class="fas fa-file-alt"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info mr-2" title="Seleccionar Mascotas" data-toggle="modal" data-target="#selectPets{{ $client->id }}">
+                                                                    <i class="fas fa-paw"></i>
+                                                                </button>   
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    @include('clients.selectPets', ['client' => $client, 'pets' => $pets])
                                                     @include('clients.show')
                                                     @include('clients.edit')
+                                                    @include('clients.delete')
                                                 @endforeach
                                             @endif
                                         </tbody>

@@ -35,6 +35,7 @@ class CreateAnimalsTable extends Migration
 
             $table->foreign('specie_id')->references('id')->on('species')->onDelete('cascade');
             $table->foreign('vet_id')->references('id')->on('vets')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 
@@ -45,9 +46,6 @@ class CreateAnimalsTable extends Migration
      */
     public function down()
     {
-        Schema::table('animals', function (Blueprint $table) {
-            $table->dropForeign(['client_id']);
-            $table->dropColumn('client_id');
-        });
+        Schema::dropIfExists('animals');
     }
 }
