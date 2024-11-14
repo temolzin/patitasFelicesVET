@@ -28,9 +28,9 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Fecha y Hora de Creación</th>
-                                            <th>Estado</th>
-                                            <th>Opciones</th>
+                                            <th>FECHA Y HORA</th>
+                                            <th>ESTADO</th>
+                                            <th>OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -66,10 +66,6 @@
                                     </tbody>
                                 </table>
                                 @include('inventories.create')
-                                @include('inventories.report')
-                                <div class="d-flex justify-content-center">
-                                    {!! $inventories->links('pagination::bootstrap-4') !!}
-                                </div>
                             </div>
                         </div>
                     </div>

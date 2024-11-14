@@ -16,12 +16,12 @@ class CreateInventoryProductTable extends Migration
         Schema::create('inventory_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('inventory_id');
-            $table->unsignedBigInteger('product_id'); // Cambié 'material_id' a 'product_id'
+            $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
             $table->timestamps();
 
             $table->foreign('inventory_id')->references('id')->on('inventories')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); // Cambié 'materials' a 'products'
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

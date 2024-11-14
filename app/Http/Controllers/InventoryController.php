@@ -20,7 +20,7 @@ class InventoryController extends Controller
             })->orWhere('status', 'like', "%{$search}%");
         }
 
-        $inventories = $query->with(['products', 'creator'])->paginate(10);
+        $inventories = $query->with(['products', 'creator'])->get();
         $products = Product::all();
 
         return view('inventories.index', compact('inventories', 'products'));
