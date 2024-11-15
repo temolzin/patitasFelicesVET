@@ -29,4 +29,9 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function inventories()
+    {
+        return $this->belongsToMany(Inventory::class)->withPivot('quantity');
+    }
 }

@@ -57,11 +57,15 @@
                                                                     data-target="#edit{{ $category->id }}">
                                                                     <i class="fas fa-edit"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-danger mr-2"
-                                                                    data-toggle="modal" title="Eliminar Registro"
-                                                                    data-target="#delete{{ $category->id }}">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </button>
+                                                                @if($category->products()->count() > 0)
+                                                                    <button type="button" class="btn btn-secondary mr-2" title="Eliminación no permitida: Esta categoría está relacionada con productos." disabled>
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                @else
+                                                                    <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $category->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         @include('category.edit')
@@ -73,9 +77,6 @@
                                         </tbody>
                                     </table>
                                     @include('category.create')
-                                    <div class="d-flex justify-content-center">
-                                        {!! $categories->links('pagination::bootstrap-4') !!}
-                                    </div>
                                 </div>
                             </div>
                         </div>
