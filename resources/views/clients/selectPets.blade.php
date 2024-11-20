@@ -1,7 +1,7 @@
 <div class="modal fade" id="selectPets{{ $client->id }}" tabindex="-1" role="dialog" aria-labelledby="selectPetsModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header modal-header-custom bg-maroon" >
                 <h5 class="modal-title" id="selectPetsModalLabel">Seleccionar Mascotas para {{ $client->name }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -19,7 +19,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn bg-maroon">Guardar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </form>
             </div>

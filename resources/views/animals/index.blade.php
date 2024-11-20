@@ -81,9 +81,6 @@
                                                                     href="{{ route('animals.petProfile', Crypt::encrypt($animal->id)) }}">
                                                                     <i class="fas fa-dog"></i>
                                                                 </a>
-                                                                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" title="Asignar Servicios" data-target="#createAssignedService{{ $animal->id }}">
-                                                                    <i class="fas fa-concierge-bell"></i>
-                                                                </button>
                                                                 </button>
                                                                 <button type="button" class="btn btn-success mr-2" data-toggle="modal" title="Registrar Vacuna" data-target="#createVaccinatedAnimal{{ $animal->id }}">
                                                                     <i class="fas fa-syringe"></i>
@@ -101,7 +98,6 @@
                                                         @include('animals.show')
                                                         @include('vaccinatedAnimal.create')
                                                         @include('vaccinatedAnimal.show')
-                                                        @include('assignService.create')
                                                     </tr>
                                                 @endforeach
                                             @endif

@@ -64,7 +64,7 @@
                                                                 <button type="button" class="btn btn-primary mr-2" title="Generar Reporte" onclick="window.location.href='{{ route('clients.report', Crypt::encrypt($client->id)) }}'">
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-info mr-2" title="Seleccionar Mascotas" data-toggle="modal" data-target="#selectPets{{ $client->id }}">
+                                                                <button type="button" class="btn bg-maroon mr-2" title="Seleccionar Mascotas" data-toggle="modal" data-target="#selectPets{{ $client->id }}">
                                                                     <i class="fas fa-paw"></i>
                                                                 </button>   
                                                             </div>
@@ -108,8 +108,18 @@
                     confirmButtonText: 'Aceptar'
                 });
             }
-        });
 
+            var errorMessage = "{{ session('error') }}";
+            if (errorMessage) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage,
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    
         $('#create').on('shown.bs.modal', function() {
             $('.select2').select2({
                 dropdownParent: $('#create')

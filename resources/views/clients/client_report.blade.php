@@ -72,10 +72,10 @@
                 </div>
                 <div class="section">
                     <h3>Mascotas Asignadas</h3>
-                    @if($client->pets && $client->pets->isNotEmpty())
+                    @if($client->animals && $client->animals->isNotEmpty())
                         <ul>
-                            @foreach($client->pets as $pet)
-                                <li>{{ $pet->name }}</li> 
+                            @foreach($client->animals as $animal)
+                                <li>{{ $animal->name }}</li> 
                             @endforeach
                         </ul>
                     @else

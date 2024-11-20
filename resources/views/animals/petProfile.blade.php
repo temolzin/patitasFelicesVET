@@ -124,21 +124,6 @@
                             @endforeach
                     </div>
                 @endif
-                @if ($animal->assignedServices->isEmpty())
-                    <div class="section-without-services">
-                        <h3>Servicios</h3>
-                        <p>No hay servicios registrados.</p>
-                    </div>
-                @else
-                    <div class="section-with-services">
-                        <h3>Servicios</h3>
-                        @foreach ($animal->assignedServices as $assignService)
-                            <p><strong>Nombre del servicio:</strong> {{ $assignService->service->name }}</p>
-                            <p><strong>Fecha del servicio:</strong> {{ $assignService->service_date }}</p>
-                            <p><strong>Costo:</strong> {{ $assignService->service->cost }}</p>
-                        @endforeach
-                    </div>
-                @endif
             </div>
         </div>
     </div>
