@@ -23,6 +23,11 @@ class Service extends Model
         return $this->belongsToMany(Animal::class, 'animal_service');
     }
 
+    public function stores()
+    {
+        return $this->belongsToMany(Store::class, 'store_tables');
+    }
+
     public function vet()
     {
         return $this->belongsTo(Vet::class, 'vets_id');

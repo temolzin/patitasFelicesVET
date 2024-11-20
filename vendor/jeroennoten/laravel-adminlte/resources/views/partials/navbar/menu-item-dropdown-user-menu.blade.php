@@ -1,4 +1,5 @@
 @php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
+@php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )
 
 @if (config('adminlte.usermenu_profile_url', false))
     @php( $profile_url = Auth::user()->adminlte_profile_url() )
@@ -16,11 +17,10 @@
 
     {{-- User menu toggler --}}
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-        @if(Auth::check() && Auth::user()->getFirstMediaUrl('userGallery'))
-            <img src="{{ Auth::user()->getFirstMediaUrl('userGallery') }}"
-            alt="Foto de {{ Auth::user()->name }}" width="25px" height="20px" style="border-radius: 50%;">
-        @else
-            <img src="{{ asset('img/avatardefault.png') }}" width="25px" height="20px" style="border-radius: 50%">
+        @if(config('adminlte.usermenu_image'))
+            <img src="{{ Auth::user()->adminlte_image() }}"
+                 class="user-image img-circle elevation-2"
+                 alt="{{ Auth::user()->name }}">
         @endif
         <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
             {{ Auth::user()->name }}
@@ -34,23 +34,13 @@
         @if(!View::hasSection('usermenu_header') && config('adminlte.usermenu_header'))
             <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
                 @if(!config('adminlte.usermenu_image')) h-auto @endif">
-                @if(Auth::check() && Auth::user()->vet) 
-                    @if(Auth::user()->getFirstMediaUrl('vetGallery'))
-                        <img src="{{ Auth::user()->getFirstMediaUrl('vetGallery') }}"
-                    alt="Foto de {{ Auth::user()->vet->name }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
-                    @else
-                        <img src="{{ asset('img/vetdefault.png') }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
-                    @endif
-                @else
-                    @if(Auth::user()->getFirstMediaUrl('userGallery'))
-                        <img src="{{ Auth::user()->getFirstMediaUrl('userGallery') }}"
-                        alt="Foto de {{ Auth::user()->name }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
-                    @else
-                        <img src="{{ asset('img/avatardefault.png') }}" width="100px" height="100px" style="border-radius: 50%; margin-top: 18px;">
-                    @endif
+                @if(config('adminlte.usermenu_image'))
+                    <img src="{{ Auth::user()->adminlte_image() }}"
+                         class="img-circle elevation-2"
+                         alt="{{ Auth::user()->name }}">
                 @endif
-                <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif" style="margin-top: 18px;">
-                    {{ Auth::user()->vet ? Auth::user()->vet->name : 'Admin' }}
+                <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif">
+                    {{ Auth::user()->name }}
                     @if(config('adminlte.usermenu_desc'))
                         <small>{{ Auth::user()->adminlte_desc() }}</small>
                     @endif

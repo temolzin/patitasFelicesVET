@@ -21,6 +21,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AssignedServiceController;
@@ -122,5 +123,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/clients/{client}/selectPets', [ClientController::class, 'selectPets'])->name('clients.selectPets');
     Route::put('/clients/{client}/updatePets', [ClientController::class, 'updatePets'])->name('clients.updatePets');
     Route::resource('clients', ClientController::class);
+
+    Route::post('/generate-report', [StoreController::class, 'generateReport'])->name('generate.report');
+    Route::get('/stores', [StoreController::class, 'index'])->name('stores.index');
+    Route::resource('stores', StoreController::class);
     
 });

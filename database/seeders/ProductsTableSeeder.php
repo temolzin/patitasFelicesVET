@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class ProductsTableSeeder extends Seeder // Cambié el nombre de la clase
+class ProductsTableSeeder extends Seeder 
 {
     /**
      * Run the database seeds.
@@ -23,6 +23,7 @@ class ProductsTableSeeder extends Seeder // Cambié el nombre de la clase
                 'created_by' => $faker->numberBetween(1, 3),
                 'name' => $faker->word() . ' ' . $faker->word(),
                 'description' => $faker->sentence(6, true),
+                'cost' => $faker->randomFloat(2, 5, 500),
                 'status' => $faker->randomElement(['disponible', 'prestado', 'en reparación']),
                 'amount' => $faker->numberBetween(1, 20),
                 'created_at' => now(),

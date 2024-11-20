@@ -63,6 +63,17 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
+                                            <label for="cost" class="form-label">Costo(*)</label>
+                                            <input type="number" step="0.01" name="cost" class="form-control @error('cost') is-invalid @enderror" value="{{ old('cost', $product->cost) }}" required />
+                                            @error('cost')
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
                                             <label for="category_id" class="form-label">Categoría(*)</label>
                                             <select class="form-control" name="category_id" id="category_id" required>
                                                 @foreach($categories as $category)

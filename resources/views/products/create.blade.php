@@ -47,6 +47,17 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
+                                            <label for="cost" class="form-label">Costo(*)</label>
+                                            <input type="number" step="0.01" class="form-control @error('cost') is-invalid @enderror" name="cost" placeholder="Ingresa el costo del servicio" value="{{ old('cost') }}" required/>
+                                            @error('cost')
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
                                             <label for="category_id" class="form-label">Categoría(*)</label>
                                             <select class="form-control" id="category_id" name="category_id" required>
                                                 <option value="">Seleccione una categoría</option>
