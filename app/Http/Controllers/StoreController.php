@@ -71,15 +71,12 @@ class StoreController extends Controller
         return redirect()->route('stores.index')->with('success', 'Venta registrada correctamente.');
     }
 
-
-
     public function show($id)
     {
         $store = Store::with(['products', 'services', 'creator'])->findOrFail($id);
     
         return view('stores.show', compact('store'));
     }
-    
 
     public function update(Request $request, $id)
     {
@@ -112,10 +109,8 @@ class StoreController extends Controller
         }
         $store->services()->sync($serviceData);
 
-
         return redirect()->route('stores.index')->with('success', 'Venta actualizada correctamente.');
     }
-
 
     public function destroy($id)
     {
@@ -124,37 +119,36 @@ class StoreController extends Controller
         return redirect()->route('stores.index')->with('success', 'Venta eliminada correctamente.');
     }
 
-    public function generateReport(Request $request)
-{
-    $validated = $request->validate([
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after_or_equal:start_date',
-    ]);
+        public function generateReport(Request $request)
+    {
+        $validated = $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
 
-    $startDate = $validated['start_date'];
-    $endDate = $validated['end_date'];
+        $startDate = $validated['start_date'];
+        $endDate = $validated['end_date'];
 
-    $products = DB::table('stores')  
-        ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
-        ->join('products', 'store_tables.product_id', '=', 'products.id')
-        ->whereBetween('stores.created_at', [$startDate, $endDate])
-        ->whereNotNull('store_tables.product_id')
-        ->select('products.name as product_name', 'store_tables.quantity', 'products.cost')
-        ->get();
+        $products = DB::table('stores')  
+            ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
+            ->join('products', 'store_tables.product_id', '=', 'products.id')
+            ->whereBetween('stores.created_at', [$startDate, $endDate])
+            ->whereNotNull('store_tables.product_id')
+            ->select('products.name as product_name', 'store_tables.quantity', 'products.cost')
+            ->get();
 
-    $services = DB::table('stores')  
-        ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
-        ->join('services', 'store_tables.service_id', '=', 'services.id')
-        ->whereBetween('stores.created_at', [$startDate, $endDate])
-        ->whereNotNull('store_tables.service_id')
-        ->select('services.name as service_name', 'store_tables.quantity', 'services.cost')
-        ->get();
+        $services = DB::table('stores')  
+            ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
+            ->join('services', 'store_tables.service_id', '=', 'services.id')
+            ->whereBetween('stores.created_at', [$startDate, $endDate])
+            ->whereNotNull('store_tables.service_id')
+            ->select('services.name as service_name', 'store_tables.quantity', 'services.cost')
+            ->get();
 
-    $totalEarnings = $products->sum(fn($product) => $product->cost * $product->quantity) +
-                      $services->sum(fn($service) => $service->cost * $service->quantity);
+        $totalEarnings = $products->sum(fn($product) => $product->cost * $product->quantity) +
+                        $services->sum(fn($service) => $service->cost * $service->quantity);
 
-    $pdf = PDF::loadView('reports.pdf', compact('products', 'services', 'totalEarnings', 'startDate', 'endDate'));
-    return $pdf->download('reporte_ventas_' . $startDate . '_a_' . $endDate . '.pdf');
-}
-
+        $pdf = PDF::loadView('reports.pdf', compact('products', 'services', 'totalEarnings', 'startDate', 'endDate'));
+        return $pdf->download('reporte_ventas_' . $startDate . '_a_' . $endDate . '.pdf');
+    }
 }

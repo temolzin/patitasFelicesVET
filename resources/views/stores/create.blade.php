@@ -163,5 +163,4 @@
             itemTypeSelect.selectedIndex = 0;
         });
     });
-    </script>
-    
+</script>

@@ -29,6 +29,7 @@ class ProductController extends Controller
 
         $categories = Category::all();
         $users = User::all();
+        $products = Product::all();
         $products = $query->paginate(10);
         return view('products.index', compact('products', 'categories'));
     }

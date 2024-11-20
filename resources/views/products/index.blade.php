@@ -28,13 +28,13 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Foto</th>
-                                            <th>Nombre</th>
-                                            <th>Costo</th>
-                                            <th>Categoría</th>
-                                            <th>Estado</th>
-                                            <th>Cantidad</th>
-                                            <th>Opciones</th>
+                                            <th>FOTO</th>
+                                            <th>NOMBRE</th>
+                                            <th>COSTO</th>
+                                            <th>CATEGORÌRA</th>
+                                            <th>ESTADO</th>
+                                            <th>CANTIDAD</th>
+                                            <th>OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,9 +69,15 @@
                                                     <button type="button" class="btn btn-primary mr-2" data-toggle="modal" title="Actualizar Imagen" data-target="#editPhoto{{ $product->id }}">
                                                         <i class="fas fa-image"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $product->id }}">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
+                                                    @if($product->exists() && $product->inventories()->count() > 0)
+                                                        <button type="button" class="btn btn-secondary mr-2" title="Eliminación no permitida: Este producto está relacionado con un inventario." disabled>
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    @else
+                                                        <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Registro" data-target="#delete{{ $product->id }}">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    @endif
                                                 </div>
                                             </td>
                                             @include('products.edit')
