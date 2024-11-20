@@ -12,7 +12,7 @@
             padding: 0;
         }
         body {
-            background-image: url('img/fondoReport.jpg');
+            background-image: url('img/backgroundReport.jpg');
             font-family: Arial, sans-serif;
             background-size: cover;
             background-position: center;
@@ -149,12 +149,12 @@
                             <td>{{ $inventory->status }}</td>
                             <td>
                                 @foreach($inventory->products as $product)
-                                    <p><strong>{{ $product->name }}</strong></p> <!-- Muestra el nombre del producto -->
+                                    <p><strong>{{ $product->name }}</strong></p>
                                 @endforeach
                             </td>
                             <td>
                                 @foreach($inventory->products as $product)
-                                    <p>{{ $product->pivot->quantity }}</p> <!-- Muestra la cantidad de cada producto -->
+                                    <p>{{ $product->pivot->quantity }}</p>
                                 @endforeach
                             </td>
                         </tr>
