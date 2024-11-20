@@ -105,6 +105,6 @@ class InventoryController extends Controller
         $pdf = PDF::loadView('reports.inventoryReport', compact('inventories', 'startDate', 'endDate', 'authUser', 'totalInventories'))
             ->setPaper('A4', 'portrait');
 
-        return $pdf->stream('reporte_inventario.pdf');
+        return $pdf->stream('reporte_inventario_veterinaria.pdf');
     }
 }

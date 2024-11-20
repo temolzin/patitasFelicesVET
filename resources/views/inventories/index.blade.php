@@ -15,6 +15,9 @@
                                 <button class="btn btn-success mr-2" data-toggle='modal' data-target="#createInventory">
                                     <i class="fa fa-plus"></i> Registrar inventario
                                 </button>
+                                <button class="btn bg-maroon" data-toggle="modal" data-target="#reportInventory">
+                                    <i class="fa fa-file-pdf"></i> Generar Reporte
+                                </button>
                             </div>
                         </div>
                     </div>                    
@@ -66,6 +69,7 @@
                                     </tbody>
                                 </table>
                                 @include('inventories.create')
+                                @include('inventories.report')
                             </div>
                         </div>
                     </div>

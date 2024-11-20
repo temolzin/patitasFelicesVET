@@ -45,6 +45,14 @@ class ClientController extends Controller
         $client = Client::findOrFail($clientId);
         $petIds = $request->input('pets');
 
+        $currentPetsCount = $client->animals()->count();
+        $newPetsCount = count($petIds);
+
+        if ($currentPetsCount + $newPetsCount > $client->number_pets)
+        {
+            return redirect()->route('clients.index')->with('error', 'No puedes asignar más mascotas. Límite alcanzado.');
+        }
+
         foreach ($petIds as $petId) {
             $animal = Animal::find($petId);
             if ($animal) {

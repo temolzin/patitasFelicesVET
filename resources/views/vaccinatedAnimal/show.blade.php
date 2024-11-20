@@ -37,35 +37,6 @@
                             @include('vaccinatedAnimal.deleteVaccinatedAnimal')
                         @endforeach
                     @endif
-
-                    <h5 class="mt-4">Servicios</h5>
-                    @php
-                    $services = $animal->assignedServices ?? collect();
-                    @endphp
-                    @if ($services->isEmpty())
-                        <p>No hay registros de servicios para este animal.</p>
-                    @else
-                        @foreach($services as $assignService)
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                <h6 class="card-title"><strong>Nombre del servicio:</strong> {{ $assignService->service->name }}</h6>
-                                    <p class="card-text">
-                                    <strong>Costo:</strong> {{ $assignService->service->cost }}
-                                    <br>
-                                    <strong>Descripción:</strong> {{ $assignService->service->description }}
-                                        <br>
-                                        <strong>Fecha del servicio:</strong> {{ $assignService->service_date }}
-                                    </p>
-                                    <div class="btn-group" role="group" aria-label="Options">
-                                        <button type="button" class="btn btn-danger mr-2" data-toggle="modal" title="Eliminar Servicio" data-target="#deleteAppliedService{{ $assignService->id }}">
-                                            <i class="fas fa-trash-alt"></i> Eliminar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                        @include('assignService.deleteAssignService', ['assignService' => $assignService, 'animal' => $animal])
-                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
