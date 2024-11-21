@@ -392,6 +392,12 @@ return [
             'can'  =>'viewClient'
         ],
         [
+            'text' => 'Ventas',
+            'url' => '/stores',
+            'icon' => 'fa fa-shopping-cart',
+            'icon_color' => 'dark',
+        ],
+        [
             'text' => 'Fallecimientos',
             'url' => '/deaths',
             'icon' => 'fas fa-fw fa-skull',

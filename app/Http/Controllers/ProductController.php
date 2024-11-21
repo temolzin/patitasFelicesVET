@@ -30,6 +30,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $users = User::all();
         $products = Product::all();
+        $products = $query->paginate(10);
         return view('products.index', compact('products', 'categories'));
     }
 
@@ -38,6 +39,7 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
+            'cost' => 'required|numeric',
             'description' => 'nullable|string|max:1000',
             'status' => 'required|string|max:100',
             'amount' => 'required|integer|min:1',
@@ -47,6 +49,7 @@ class ProductController extends Controller
         $product = Product::create([
             'category_id' => $validatedData['category_id'],
             'name' => $validatedData['name'],
+            'cost' => $validatedData['cost'],
             'description' => $validatedData['description'],
             'status' => $validatedData['status'],
             'amount' => $validatedData['amount'],
@@ -74,6 +77,7 @@ class ProductController extends Controller
         {
             $product->category_id = $request->input('category_id');
             $product->name = $request->input('name');
+            $product->cost = $request->input('cost');
             $product->description = $request->input('description');
             $product->status = $request->input('status');
             $product->amount = $request->input('amount');

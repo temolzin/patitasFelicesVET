@@ -30,7 +30,8 @@
                                             <th>ID</th>
                                             <th>FOTO</th>
                                             <th>NOMBRE</th>
-                                            <th>CATEGORÍA</th>
+                                            <th>COSTO</th>
+                                            <th>CATEGORÌRA</th>
                                             <th>ESTADO</th>
                                             <th>CANTIDAD</th>
                                             <th>OPCIONES</th>
@@ -53,6 +54,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $product->name }}</td>
+                                            <td>{{ $product->cost }}</td>
                                             <td>{{ $product->category->name }}</td>
                                             <td>{{ $product->status }}</td>
                                             <td>{{ $product->amount }}</td>
@@ -88,6 +90,9 @@
                                     </tbody>
                                 </table>
                                 @include('products.create')
+                                <div class="d-flex justify-content-center">
+                                    {!! $products->links('pagination::bootstrap-4') !!}
+                                </div>
                             </div>
                         </div>
                     </div>

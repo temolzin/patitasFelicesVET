@@ -16,6 +16,7 @@ class Product extends Model implements HasMedia
         'created_by',
         'name',
         'description',
+        'cost',
         'status',
         'amount',
     ];
@@ -23,6 +24,11 @@ class Product extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function stores()
+    {
+        return $this->belongsToMany(Store::class, 'store_tables')->withPivot('quantity');
     }
 
     public function creator()

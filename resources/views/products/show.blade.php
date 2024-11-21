@@ -45,6 +45,12 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label>Costo</label>
+                                        <input type="text" disabled class="form-control" value="{{ $product->cost }}" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label>Categoría</label>
                                         <input type="text" disabled class="form-control" value="{{ $product->category->name }}" />
                                     </div>

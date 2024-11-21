@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('created_by');
             $table->string('name');
+            $table->decimal('cost', 8, 2);
             $table->text('description');
             $table->string('status');
             $table->integer('amount');
