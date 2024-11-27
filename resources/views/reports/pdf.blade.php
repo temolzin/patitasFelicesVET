@@ -151,7 +151,6 @@
                 </tbody>
             </table>
         </div>
-
         <h4>Servicios Vendidos</h4>
         <div class="table-container">
             <table class="table">
@@ -177,12 +176,10 @@
                 </tbody>
             </table>
         </div>
-
         <div class="total">
             <strong>Total de Ganancias: ${{ number_format($totalEarnings, 2) }}</strong>
         </div>
     </div>
-
     <div class="info_Eabajo">
         <a class="text_infoE" href="https://patitasfelicesvet.rootheim.com/"><strong>PatitasFelices</strong></a>
         <a class="text_infoE" href="https://rootheim.com/">powered by<strong> Root Heim Company </strong></a><img src="img/logoRootBlack.png" width="15px" height="15px">

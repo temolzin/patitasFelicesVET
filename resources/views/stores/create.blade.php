@@ -33,10 +33,8 @@
                                             @foreach($clients as $client)
                                             <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>{{ $client->name }}</option>
                                             @endforeach
-                                            
                                         </select>
                                     </div>
-
                                     <div class="form-group col-lg-6">
                                         <label for="item_type">Tipo de Ítem</label>
                                         <select id="item_type" class="form-control">
@@ -46,7 +44,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group col-lg-6" id="itemSelectContainer">
                                         <label id="itemLabel" for="item_id">Selecciona un ítem</label>
@@ -54,7 +51,6 @@
                                             <option value="">Selecciona un ítem</option>
                                         </select>
                                     </div>
-
                                     <div class="form-group col-lg-6">
                                         <label for="storeMetodPay" class="form-label">Método de Pago (*)</label>
                                         <select class="form-control" id="storeMetodPay" name="payment_method" required>
@@ -63,18 +59,15 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="storeDescription">Descripción de la Venta</label>
                                     <textarea id="storeDescription" class="form-control" name="description" rows="3"></textarea>
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group col-lg-12 d-flex justify-content-end">
                                         <button type="button" id="addItemToStoreBtn" class="btn btn-success">Agregar Ítem</button>
                                     </div>
                                 </div>
-
                                 <table class="table table-bordered mt-3" id="storeItemTable">
                                     <thead>
                                         <tr>
@@ -86,7 +79,6 @@
                                     </thead>
                                     <tbody></tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -99,7 +91,6 @@
         </div>
     </div>
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const itemTypeSelect = document.getElementById('item_type');

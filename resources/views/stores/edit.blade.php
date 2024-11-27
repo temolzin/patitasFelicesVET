@@ -36,7 +36,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-
                                     <div class="form-group col-lg-6">
                                         <label for="edit_item_type">Tipo de Ítem</label>
                                         <select name="edit_item_type" id="edit_item_type_{{ $store->id }}" class="form-control select2">
@@ -46,7 +45,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group col-lg-6" id="editItemSelectContainer_{{ $store->id }}">
                                         <label id="editItemLabel_{{ $store->id }}" for="edit_item_id">Selecciona un ítem</label>
@@ -54,7 +52,6 @@
                                             <option value="">Selecciona un ítem</option>
                                         </select>
                                     </div>
-
                                     <div class="form-group col-lg-6">
                                         <label for="editPaymentMethod">Método de Pago</label>
                                         <select name="editStoreMetodPay" id="editStoreMetodPay" class="form-control select2">
@@ -63,18 +60,15 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="storeDescription">Descripción de la Venta</label>
                                     <textarea id="storeDescription" class="form-control" name="description" rows="3"></textarea>
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group col-lg-12 d-flex justify-content-center">
                                         <button type="button" id="addEditItemToStoreBtn_{{ $store->id }}" class="btn btn-primary">Agregar Ítem</button>
                                     </div>
                                 </div>
-
                                 <table class="table table-bordered mt-3" id="editStoreItemTable_{{ $store->id }}">
                                     <thead>
                                         <tr>
@@ -93,7 +87,6 @@
                                                 <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
                                             </tr>
                                         @endforeach
-
                                         @foreach($store->services as $service)
                                             <tr>
                                                 <td>{{ $service->name }}<input type="hidden" name="services[]" value="{{ $service->id }}"></td>
@@ -102,14 +95,11 @@
                                                 <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" id="saveEditStore" class="btn btn-warning">Actualizar</button>
@@ -119,7 +109,6 @@
         </div>
     </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const itemTypeSelect = document.getElementById('edit_item_type_{{ $store->id }}');
@@ -132,12 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
     itemTypeSelect.addEventListener('change', function() {
         itemSelect.innerHTML = '<option value="">Selecciona un ítem</option>';
 
-        let items = [];
-        if (itemTypeSelect.value === 'product') {
-            items = products;
-        } else if (itemTypeSelect.value === 'service') {
-            items = services;
-        }
+        const items = itemTypeSelect.value === 'product' 
+        ? products 
+        : itemTypeSelect.value === 'service' 
+        ? services 
+        : [];
 
         items.forEach(item => {
             const option = document.createElement('option');
@@ -170,25 +158,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const newRow = document.createElement('tr');
-if (itemTypeSelect.value === 'product') {
-    newRow.innerHTML = `  
-        <td>${itemName}<input type="hidden" name="products[]" value="${itemId}"></td>
-        <td><input type="number" class="form-control quantity-input" name="quantities[]" min="1" value="1"></td>
-        <td><input type="number" class="form-control price-input" name="cost[]" value="${itemCost}" readonly></td>
-        <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
-    `;
-} else if (itemTypeSelect.value === 'service') {
-    newRow.innerHTML = `  
-        <td>${itemName}<input type="hidden" name="services[]" value="${itemId}"></td>
-        <td><input type="number" class="form-control quantity-input" name="service_quantities[]" min="1" value="1"></td>
-        <td><input type="number" class="form-control price-input" name="cost[]" value="${itemCost}" readonly></td>
-        <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
-    `;
-}
+        if (itemTypeSelect.value === 'product') {
+            newRow.innerHTML = `  
+            <td>${itemName}<input type="hidden" name="products[]" value="${itemId}"></td>
+            <td><input type="number" class="form-control quantity-input" name="quantities[]" min="1" value="1"></td>
+            <td><input type="number" class="form-control price-input" name="cost[]" value="${itemCost}" readonly></td>
+            <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+        } else if (itemTypeSelect.value === 'service') {
+            newRow.innerHTML = `  
+            <td>${itemName}<input type="hidden" name="services[]" value="${itemId}"></td>
+            <td><input type="number" class="form-control quantity-input" name="service_quantities[]" min="1" value="1"></td>
+            <td><input type="number" class="form-control price-input" name="cost[]" value="${itemCost}" readonly></td>
+            <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+        }
         itemTableBody.appendChild(newRow);
 
         const quantityInput = newRow.querySelector('.quantity-input');
-        quantityInput.addEventListener('input', function() {
+        quantityInput.addEventListener('input', function()
+        {
             const quantity = parseInt(this.value);
             const priceInput = newRow.querySelector('.price-input');
             priceInput.value = (itemCost * quantity).toFixed(2);
@@ -199,15 +188,16 @@ if (itemTypeSelect.value === 'product') {
         document.getElementById('storeDescription').value = '';
     });
 
-    itemTableBody.addEventListener('click', function(event) {
-        if (event.target.closest('.delete-row')) {
+    itemTableBody.addEventListener('click', function(event)
+    {
+        if (event.target.closest('.delete-row'))
+        {
             const row = event.target.closest('tr');
             row.remove();
         }
     });
 });
 </script>
-
 <style>
     #editStoreItemTable_{{ $store->id }} tbody tr:nth-child(odd) {
         background-color: #ffffff;

@@ -34,11 +34,12 @@ class StoreController extends Controller
 
         foreach ($stores as $store) {
             $store->total = $store->products->sum(function ($product) {
-            return $product->pivot->quantity * $product->cost;
+                return $product->pivot->quantity * $product->cost;
             }) + $store->services->sum(function ($service) {
                 return $service->pivot->quantity * $service->cost;
             });
         }
+        
         $products = Product::all();
         $services = Service::all();
         $clients = Client::all();
@@ -73,14 +74,16 @@ class StoreController extends Controller
             }
             $store->products()->sync($productData);
         }
-
+        
         $serviceData = [];
-        if (!empty($validated['services'])) {
-            foreach ($validated['services'] as $key => $service_id) {
+        if (!empty($validated['services'])) 
+        {
+            foreach ($validated['services'] as $key => $service_id)
+            {
                 $quantity = $validated['service_quantities'][$key] ?? 1;
-            $serviceData[$service_id] = ['quantity' => $quantity];
-        }
-        $store->services()->sync($serviceData);
+                $serviceData[$service_id] = ['quantity' => $quantity];
+            }
+            $store->services()->sync($serviceData);
         }
 
         return redirect()->route('stores.index')->with('success', 'Venta registrada correctamente');
@@ -90,12 +93,14 @@ class StoreController extends Controller
     {
         $store = Store::with(['client', 'products', 'services'])->findOrFail($id);
         
-        $store->total = $store->products->sum(function ($product) {
+        $store->total = $store->products->sum(function ($product)
+        {
             return $product->pivot->quantity * $product->cost;
-        }) + $store->services->sum(function ($service) {
+        }) + $store->services->sum(function ($service)
+        {
             return $service->pivot->quantity * $service->cost;
         });
-        
+
         return view('stores.show', compact('store'));
     }
 
@@ -109,7 +114,8 @@ class StoreController extends Controller
         $services = $request->input('services', []);
         $serviceQuantities = $request->input('service_quantities', []);
         
-        if (empty($products) && empty($services)) {
+        if (empty($products) && empty($services))
+        {
             return redirect()->back()->withErrors('Debe seleccionar al menos un producto o servicio.');
         }
         
@@ -118,7 +124,8 @@ class StoreController extends Controller
         $store->save();
 
         $productData = [];
-        foreach ($products as $key => $product_id) {
+        foreach ($products as $key => $product_id)
+        {
             $quantity = $productQuantities[$key] ?? 1;
             $product = Product::findOrFail($product_id);
             $productData[$product_id] = [
@@ -129,15 +136,16 @@ class StoreController extends Controller
         $store->products()->sync($productData);
 
         $serviceData = [];
-        foreach ($services as $key => $service_id) {
+        foreach ($services as $key => $service_id)
+        {
             $quantity = $serviceQuantities[$key] ?? 1;
             $service = Service::findOrFail($service_id);
             $serviceData[$service_id] = [
                 'quantity' => $quantity,
             ];
         }
-        $store->services()->sync($serviceData);
         
+        $store->services()->sync($serviceData);
         return redirect()->route('stores.index')->with('success', 'Venta actualizada correctamente.');
     }
 

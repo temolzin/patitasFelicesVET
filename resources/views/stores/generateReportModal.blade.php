@@ -35,6 +35,6 @@
     }
 
     .modal-header-custom {
-        background-color: #800000; /* color maroon */
+        background-color: #800000;
     }
 </style>
