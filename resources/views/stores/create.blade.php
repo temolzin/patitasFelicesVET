@@ -27,6 +27,17 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-lg-6">
+                                        <label for="client_id">Cliente (*)</label>
+                                        <select id="client_id" class="form-control" name="client_id" required>
+                                        <option value="">Selecciona un cliente</option>
+                                            @foreach($clients as $client)
+                                            <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>{{ $client->name }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
                                         <label for="item_type">Tipo de Ítem</label>
                                         <select id="item_type" class="form-control">
                                             <option value="">Selecciona el tipo</option>
@@ -34,42 +45,40 @@
                                             <option value="service">Servicio</option>
                                         </select>
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="form-group col-lg-6" id="itemSelectContainer">
                                         <label id="itemLabel" for="item_id">Selecciona un ítem</label>
                                         <select id="item_id" class="form-control">
                                             <option value="">Selecciona un ítem</option>
                                         </select>
                                     </div>
-                                </div>
 
-                                <div class="row align-items-center text-center">
-                                    <div class="form-group col-lg-4 ">
-                                        <label for="storeStatus" class="form-label">Estado (*)</label>
-                                        <select class="form-control" id="storeStatus" name="status" required>
-                                            <option value="abierta">Disponible</option>
-                                            <option value="cerrada">No disponible</option>
-                                        </select>
-                                    </div>
-                                
-                                    <div class="form-group col-lg-4 d-flex justify-content-center">
-                                        <button type="button" id="addItemToStoreBtn" class="btn btn-primary">Agregar Ítem a Venta</button>
-                                    </div>
-                                
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-6">
                                         <label for="storeMetodPay" class="form-label">Método de Pago (*)</label>
                                         <select class="form-control" id="storeMetodPay" name="payment_method" required>
                                             <option value="efectivo">Efectivo</option>
                                             <option value="tarjeta">Tarjeta</option>
                                         </select>
                                     </div>
-                                </div>                                
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="storeDescription">Descripción de la Venta</label>
+                                    <textarea id="storeDescription" class="form-control" name="description" rows="3"></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-lg-12 d-flex justify-content-end">
+                                        <button type="button" id="addItemToStoreBtn" class="btn btn-success">Agregar Ítem</button>
+                                    </div>
+                                </div>
 
                                 <table class="table table-bordered mt-3" id="storeItemTable">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Descripción</th>
                                             <th>Cantidad</th>
                                             <th>Precio</th>
                                             <th>Acción</th>
@@ -90,7 +99,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -128,7 +136,6 @@
             if (!itemId) return alert('Por favor selecciona un ítem.');
 
             const itemName = itemSelect.selectedOptions[0].text;
-            const itemDescription = itemSelect.selectedOptions[0].dataset.description;
             const itemCost = parseFloat(itemSelect.selectedOptions[0].dataset.cost);
 
             const isProduct = itemTypeSelect.value === 'product';
@@ -136,11 +143,10 @@
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
                 <td>${itemName}<input type="hidden" name="${isProduct ? 'products[]' : 'services[]'}" value="${itemId}"></td>
-                <td>${itemDescription}</td>
                 <td><input type="number" class="form-control quantity-input" name="${isProduct ? 'product_quantities[]' : 'service_quantities[]'}" min="1" value="1"></td>
                 <td><input type="number" class="form-control price-input" name="cost[]" value="${itemCost}" readonly></td>
                 <td><button type="button" class="btn btn-danger btn-sm delete-row"><i class="fas fa-trash-alt"></i></button></td>
-            `;
+                `;
             itemTableBody.appendChild(newRow);
 
             newRow.querySelector('.quantity-input').addEventListener('input', function () {
@@ -164,4 +170,3 @@
         });
     });
 </script>
-

@@ -19,6 +19,7 @@ class CreateStoreTablesTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->unsignedBigInteger('service_id')->nullable(); 
             $table->integer('quantity');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');

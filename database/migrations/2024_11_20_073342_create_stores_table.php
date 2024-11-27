@@ -16,11 +16,12 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('created_by');
-            $table->string('status');
             $table->string('payment_method')->default('efectivo');
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');  
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 

@@ -23,8 +23,8 @@
                                 </div>
 
                                 <div class="form-group col-lg-3">
-                                    <label for="viewStoreStatus">Estado</label>
-                                    <input type="text" disabled class="form-control" value="{{ $store->status == 'abierta' ? 'Disponible' : 'No disponible' }}" />
+                                    <label for="viewStoreClient">Cliente</label>
+                                    <input type="text" disabled class="form-control" value="{{ ucfirst($store->client->name ?? 'Cliente no disponible') }}" />
                                 </div>
 
                                 <div class="form-group col-lg-3">
@@ -42,7 +42,6 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Descripción</th>
                                         <th>Cantidad</th>
                                         <th>Precio</th>
                                     </tr>
@@ -51,7 +50,6 @@
                                     @foreach($store->products as $product)
                                         <tr>
                                             <td>{{ $product->name }}</td>
-                                            <td>{{ $product->description }}</td>
                                             <td>{{ $product->pivot->quantity }}</td>
                                             <td>${{ number_format($product->pivot->quantity * $product->cost, 2) }}</td>
                                         </tr>
@@ -59,7 +57,6 @@
                                     @foreach($store->services as $service)
                                         <tr>
                                             <td>{{ $service->name }}</td>
-                                            <td>{{ $service->description }}</td>
                                             <td>{{ $service->pivot->quantity }}</td>
                                             <td>${{ number_format($service->pivot->quantity * $service->cost, 2) }}</td>
                                         </tr>
