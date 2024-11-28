@@ -29,4 +29,9 @@ class Client extends Model
     {
         return $this->hasMany(Animal::class, 'client_id');
     }
+
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
 }

@@ -13,7 +13,13 @@ class Store extends Model
         'created_by',
         'status',
         'payment_method',
+        'description',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     public function products()
     {

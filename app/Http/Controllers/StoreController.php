@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
@@ -23,58 +24,83 @@ class StoreController extends Controller
             $query->whereHas('products', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
             })
-            ->orWhere('status', 'like', "%{$search}%")
             ->orWhere('payment_method', 'like', "%{$search}%")
             ->orWhereHas('services', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
             });
         }
 
-        $stores = $query->with(['products', 'creator', 'services'])->paginate(10);
+        $stores = $query->with(['client', 'products', 'services'])->get();
+
+        foreach ($stores as $store) {
+            $store->total = $store->products->sum(function ($product) {
+                return $product->pivot->quantity * $product->cost;
+            }) + $store->services->sum(function ($service) {
+                return $service->pivot->quantity * $service->cost;
+            });
+        }
+        
         $products = Product::all();
         $services = Service::all();
-
-        return view('stores.index', compact('stores', 'products', 'services'));
+        $clients = Client::all();
+        
+        return view('stores.index', compact('clients','stores', 'products', 'services'));
     }
-
-        public function store(Request $request)
+    
+    public function store(Request $request)
     {
-        $products = $request->input('products');
-        $services = $request->input('services');
-        $productQuantities = $request->input('product_quantities');
-        $serviceQuantities = $request->input('service_quantities');
-
-        if (empty($products) || empty($services)) {
-            return redirect()->back()->withErrors('Debe seleccionar al menos un producto y un servicio.');
-        }
-
-        $store = Store::create([
-            'status' => $request->input('status'),
-            'payment_method' => $request->input('payment_method', 'efectivo'),
-            'created_by' => auth()->user()->id,
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'payment_method' => 'required|in:efectivo,tarjeta',
+            'products' => 'nullable|array',
+            'products.*' => 'exists:products,id',
+            'product_quantities' => 'nullable|array',
+            'services' => 'nullable|array',
+            'services.*' => 'exists:services,id',
+            'service_quantities' => 'nullable|array',
         ]);
 
+        $store = new Store();
+        $store->client_id = $request->client_id;
+        $store->created_by = auth()->id();
+        $store->payment_method = $request->payment_method;
+        $store->save();
+
         $productData = [];
-        foreach ($products as $key => $product_id) {
-            $quantity = isset($productQuantities[$key]) ? $productQuantities[$key] : 1;
-            $productData[$product_id] = ['quantity' => $quantity];
+        if (!empty($validated['products'])) {
+            foreach ($validated['products'] as $key => $product_id) {
+                $quantity = $validated['product_quantities'][$key] ?? 1;
+                $productData[$product_id] = ['quantity' => $quantity];
+            }
+            $store->products()->sync($productData);
         }
-        $store->products()->sync($productData);
-
+        
         $serviceData = [];
-        foreach ($services as $key => $service_id) {
-            $quantity = isset($serviceQuantities[$key]) ? $serviceQuantities[$key] : 1;
-            $serviceData[$service_id] = ['quantity' => $quantity];
+        if (!empty($validated['services'])) 
+        {
+            foreach ($validated['services'] as $key => $service_id)
+            {
+                $quantity = $validated['service_quantities'][$key] ?? 1;
+                $serviceData[$service_id] = ['quantity' => $quantity];
+            }
+            $store->services()->sync($serviceData);
         }
-        $store->services()->sync($serviceData);
 
-        return redirect()->route('stores.index')->with('success', 'Venta registrada correctamente.');
+        return redirect()->route('stores.index')->with('success', 'Venta registrada correctamente');
     }
 
     public function show($id)
     {
-        $store = Store::with(['products', 'services', 'creator'])->findOrFail($id);
-    
+        $store = Store::with(['client', 'products', 'services'])->findOrFail($id);
+        
+        $store->total = $store->products->sum(function ($product)
+        {
+            return $product->pivot->quantity * $product->cost;
+        }) + $store->services->sum(function ($service)
+        {
+            return $service->pivot->quantity * $service->cost;
+        });
+
         return view('stores.show', compact('store'));
     }
 
@@ -82,33 +108,44 @@ class StoreController extends Controller
     {
         $store = Store::findOrFail($id);
 
-        $products = $request->input('products', []); 
-        $quantities = $request->input('quantities', []); 
-        $services = $request->input('services', []); 
-        $serviceQuantities = $request->input('service_quantities', []); 
-
-        if (empty($products) && empty($services)) {
+        $clientId = $request->input('client_id');
+        $products = $request->input('products', []);
+        $productQuantities = $request->input('quantities', []);
+        $services = $request->input('services', []);
+        $serviceQuantities = $request->input('service_quantities', []);
+        
+        if (empty($products) && empty($services))
+        {
             return redirect()->back()->withErrors('Debe seleccionar al menos un producto o servicio.');
         }
-
-        $store->status = $request->input('editStoreStatus', $store->status);
-        $store->payment_method = $request->input('editStoreMetodPay', $store->payment_method);
+        
+        $store->client_id = $clientId;
+        $store->payment_method = $request->input('payment_method', 'efectivo');
         $store->save();
 
         $productData = [];
-        foreach ($products as $key => $product_id) {
-            $quantity = isset($quantities[$key]) ? $quantities[$key] : 1;
-            $productData[$product_id] = ['quantity' => $quantity];
+        foreach ($products as $key => $product_id)
+        {
+            $quantity = $productQuantities[$key] ?? 1;
+            $product = Product::findOrFail($product_id);
+            $productData[$product_id] = [
+                'quantity' => $quantity,
+            ];
         }
+        
         $store->products()->sync($productData);
 
         $serviceData = [];
-        foreach ($services as $key => $service_id) {
-            $quantity = isset($serviceQuantities[$key]) ? $serviceQuantities[$key] : 1;
-            $serviceData[$service_id] = ['quantity' => $quantity];
+        foreach ($services as $key => $service_id)
+        {
+            $quantity = $serviceQuantities[$key] ?? 1;
+            $service = Service::findOrFail($service_id);
+            $serviceData[$service_id] = [
+                'quantity' => $quantity,
+            ];
         }
+        
         $store->services()->sync($serviceData);
-
         return redirect()->route('stores.index')->with('success', 'Venta actualizada correctamente.');
     }
 
@@ -119,36 +156,41 @@ class StoreController extends Controller
         return redirect()->route('stores.index')->with('success', 'Venta eliminada correctamente.');
     }
 
-        public function generateReport(Request $request)
+    public function generateReport(Request $request)
     {
         $validated = $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-
+    
         $startDate = $validated['start_date'];
         $endDate = $validated['end_date'];
-
-        $products = DB::table('stores')  
+    
+        $products = DB::table('stores')
             ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
             ->join('products', 'store_tables.product_id', '=', 'products.id')
+            ->join('clients', 'stores.client_id', '=', 'clients.id')
             ->whereBetween('stores.created_at', [$startDate, $endDate])
             ->whereNotNull('store_tables.product_id')
-            ->select('products.name as product_name', 'store_tables.quantity', 'products.cost')
+            ->select('products.name as product_name', 'store_tables.quantity', 'products.cost','clients.name as client_name')
             ->get();
-
-        $services = DB::table('stores')  
+    
+        $services = DB::table('stores')
             ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
             ->join('services', 'store_tables.service_id', '=', 'services.id')
+            ->join('clients', 'stores.client_id', '=', 'clients.id')
             ->whereBetween('stores.created_at', [$startDate, $endDate])
             ->whereNotNull('store_tables.service_id')
-            ->select('services.name as service_name', 'store_tables.quantity', 'services.cost')
+            ->select('services.name as service_name', 'store_tables.quantity', 'services.cost','clients.name as client_name')
             ->get();
-
+    
         $totalEarnings = $products->sum(fn($product) => $product->cost * $product->quantity) +
-                        $services->sum(fn($service) => $service->cost * $service->quantity);
-
-        $pdf = PDF::loadView('reports.pdf', compact('products', 'services', 'totalEarnings', 'startDate', 'endDate'));
+                         $services->sum(fn($service) => $service->cost * $service->quantity);
+    
+        $authUser = Auth::user();
+    
+        $pdf = PDF::loadView('reports.pdf', compact('products', 'services', 'totalEarnings', 'startDate', 'endDate', 'authUser'));
+    
         return $pdf->download('reporte_ventas_' . $startDate . '_a_' . $endDate . '.pdf');
     }
 }

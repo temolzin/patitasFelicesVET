@@ -10,16 +10,19 @@
                 <div class="x_title">
                     <h2>Ventas</h2>
                     <div class="row">
-                        <div class="col-lg-12 text-right">
-                            <div class="btn-group" role="group" aria-label="Acciones de Ventaa">
-                                <button class="btn btn-success mr-2" data-toggle='modal' data-target="#createStore">
-                                    <i class="fa fa-plus"></i> Registrar venta
-                                </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generateReportModal">
-                                    Generar Reporte
-                                </button>
-                            </div>
+                    <div class="col-lg-12 text-right">
+                        <div class="btn-group" role="group" aria-label="Acciones de Venta">
+                            <button class="btn btn-success mr-3" data-toggle='modal' data-target="#createStore">
+                                <i class="fa fa-plus"></i> Registrar venta
+                            </button>
+                            <button type="button" class="btn bg-maroon mr-3" data-toggle="modal" data-target="#generateReportModal">
+                                <i class="fa fa-plus"></i> Reporte Mensual
+                            </button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#annualEarningsModal">
+                                <i class="fa fa-plus"></i>Reporte Anual
+                            </button>
                         </div>
+                    </div>
                     </div>                    
                     <div class="clearfix"></div>
                 </div>      
@@ -31,9 +34,9 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Fecha y Hora de la Venta</th>
-                                            <th>Estado</th>
-                                            <th>Opciones</th>
+                                            <th>FECHA Y HORA</th>
+                                            <th>MÉTODO DE PAGO</th>
+                                            <th>OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,7 +49,7 @@
                                         <tr>
                                             <td scope="row">{{ $store->id }}</td>
                                             <td>{{ $store->created_at->format('d/m/Y H:i:s') }}</td>
-                                            <td>{{ $store->status }}</td>
+                                            <td>{{ $store->payment_method }}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Opciones">
                                                     <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{ $store->id }}">
@@ -71,9 +74,6 @@
                                 </table>
                                 @include('stores.create')
                                 @include('stores.generateReportModal')
-                                <div class="d-flex justify-content-center">
-                                    {!! $stores->links('pagination::bootstrap-4') !!}
-                                </div>
                             </div>
                         </div>
                     </div>
