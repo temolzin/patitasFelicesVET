@@ -8,8 +8,6 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Log;
-
 
 class StoreController extends Controller
 {
@@ -19,7 +17,6 @@ class StoreController extends Controller
 
         if ($request->has('search')) {
             $search = $request->input('search');
-            
             $query->whereHas('products', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
             })
@@ -37,15 +34,15 @@ class StoreController extends Controller
         return view('stores.index', compact('stores', 'products', 'services'));
     }
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
-        $products = $request->input('products');
-        $services = $request->input('services');
-        $productQuantities = $request->input('product_quantities');
-        $serviceQuantities = $request->input('service_quantities');
+        $products = $request->input('products', []);
+        $services = $request->input('services', []);
+        $productQuantities = $request->input('product_quantities', []);
+        $serviceQuantities = $request->input('service_quantities', []);
 
-        if (empty($products) || empty($services)) {
-            return redirect()->back()->withErrors('Debe seleccionar al menos un producto y un servicio.');
+        if (empty($products) && empty($services)) {
+            return redirect()->back()->withErrors('Debe seleccionar al menos un producto o un servicio.');
         }
 
         $store = Store::create([
@@ -54,19 +51,23 @@ class StoreController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
-        $productData = [];
-        foreach ($products as $key => $product_id) {
-            $quantity = isset($productQuantities[$key]) ? $productQuantities[$key] : 1;
-            $productData[$product_id] = ['quantity' => $quantity];
+        if (!empty($products)) {
+            $productData = [];
+            foreach ($products as $key => $product_id) {
+                $quantity = isset($productQuantities[$key]) ? $productQuantities[$key] : 1;
+                $productData[$product_id] = ['quantity' => $quantity];
+            }
+            $store->products()->sync($productData);
         }
-        $store->products()->sync($productData);
 
-        $serviceData = [];
-        foreach ($services as $key => $service_id) {
-            $quantity = isset($serviceQuantities[$key]) ? $serviceQuantities[$key] : 1;
-            $serviceData[$service_id] = ['quantity' => $quantity];
+        if (!empty($services)) {
+            $serviceData = [];
+            foreach ($services as $key => $service_id) {
+                $quantity = isset($serviceQuantities[$key]) ? $serviceQuantities[$key] : 1;
+                $serviceData[$service_id] = ['quantity' => $quantity];
+            }
+            $store->services()->sync($serviceData);
         }
-        $store->services()->sync($serviceData);
 
         return redirect()->route('stores.index')->with('success', 'Venta registrada correctamente.');
     }
@@ -74,7 +75,7 @@ class StoreController extends Controller
     public function show($id)
     {
         $store = Store::with(['products', 'services', 'creator'])->findOrFail($id);
-    
+
         return view('stores.show', compact('store'));
     }
 
@@ -82,44 +83,52 @@ class StoreController extends Controller
     {
         $store = Store::findOrFail($id);
 
-        $products = $request->input('products', []); 
-        $quantities = $request->input('quantities', []); 
-        $services = $request->input('services', []); 
-        $serviceQuantities = $request->input('service_quantities', []); 
+        $products = $request->input('products', []);
+        $quantities = $request->input('quantities', []);
+        $services = $request->input('services', []);
+        $serviceQuantities = $request->input('service_quantities', []);
 
         if (empty($products) && empty($services)) {
-            return redirect()->back()->withErrors('Debe seleccionar al menos un producto o servicio.');
+            return redirect()->back()->withErrors('Debe seleccionar al menos un producto o un servicio.');
         }
 
         $store->status = $request->input('editStoreStatus', $store->status);
         $store->payment_method = $request->input('editStoreMetodPay', $store->payment_method);
         $store->save();
 
-        $productData = [];
-        foreach ($products as $key => $product_id) {
-            $quantity = isset($quantities[$key]) ? $quantities[$key] : 1;
-            $productData[$product_id] = ['quantity' => $quantity];
+        if (!empty($products)) {
+            $productData = [];
+            foreach ($products as $key => $product_id) {
+                $quantity = isset($quantities[$key]) ? $quantities[$key] : 1;
+                $productData[$product_id] = ['quantity' => $quantity];
+            }
+            $store->products()->sync($productData);
+        } else {
+            $store->products()->detach();
         }
-        $store->products()->sync($productData);
 
-        $serviceData = [];
-        foreach ($services as $key => $service_id) {
-            $quantity = isset($serviceQuantities[$key]) ? $serviceQuantities[$key] : 1;
-            $serviceData[$service_id] = ['quantity' => $quantity];
+        if (!empty($services)) {
+            $serviceData = [];
+            foreach ($services as $key => $service_id) {
+                $quantity = isset($serviceQuantities[$key]) ? $serviceQuantities[$key] : 1;
+                $serviceData[$service_id] = ['quantity' => $quantity];
+            }
+            $store->services()->sync($serviceData);
+        } else {
+            $store->services()->detach();
         }
-        $store->services()->sync($serviceData);
 
         return redirect()->route('stores.index')->with('success', 'Venta actualizada correctamente.');
     }
 
     public function destroy($id)
     {
-        $store = Store::findOrFail($id); 
-        $store->delete();  
+        $store = Store::findOrFail($id);
+        $store->delete();
         return redirect()->route('stores.index')->with('success', 'Venta eliminada correctamente.');
     }
 
-        public function generateReport(Request $request)
+    public function generateReport(Request $request)
     {
         $validated = $request->validate([
             'start_date' => 'required|date',
@@ -129,7 +138,7 @@ class StoreController extends Controller
         $startDate = $validated['start_date'];
         $endDate = $validated['end_date'];
 
-        $products = DB::table('stores')  
+        $products = DB::table('stores')
             ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
             ->join('products', 'store_tables.product_id', '=', 'products.id')
             ->whereBetween('stores.created_at', [$startDate, $endDate])
@@ -137,7 +146,7 @@ class StoreController extends Controller
             ->select('products.name as product_name', 'store_tables.quantity', 'products.cost')
             ->get();
 
-        $services = DB::table('stores')  
+        $services = DB::table('stores')
             ->join('store_tables', 'stores.id', '=', 'store_tables.store_id')
             ->join('services', 'store_tables.service_id', '=', 'services.id')
             ->whereBetween('stores.created_at', [$startDate, $endDate])
@@ -146,9 +155,9 @@ class StoreController extends Controller
             ->get();
 
         $totalEarnings = $products->sum(fn($product) => $product->cost * $product->quantity) +
-                        $services->sum(fn($service) => $service->cost * $service->quantity);
+            $services->sum(fn($service) => $service->cost * $service->quantity);
 
         $pdf = PDF::loadView('reports.pdf', compact('products', 'services', 'totalEarnings', 'startDate', 'endDate'));
-        return $pdf->download('reporte_ventas_' . $startDate . '_a_' . $endDate . '.pdf');
+        return $pdf->download('reporte_ventas_' . $startDate . 'a' . $endDate . '.pdf');
     }
 }

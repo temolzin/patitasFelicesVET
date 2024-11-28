@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Client;
+use App\Models\Animal;
 
 class ClientSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class ClientSeeder extends Seeder
         Client::create([
             'name' => 'John',
             'last_name' => 'Doe',
+            'animal_id' => Animal::inRandomOrder()->first()->id,
             'phone' => '5551234567',
             'email' => 'johndoe@example.com',
             'state' => 'California',
@@ -31,6 +33,7 @@ class ClientSeeder extends Seeder
         Client::create([
             'name' => 'Jane',
             'last_name' => 'Smith',
+            'animal_id' => Animal::inRandomOrder()->first()->id,
             'phone' => '5557654321',
             'email' => 'janesmith@example.com',
             'state' => 'Texas',
@@ -45,6 +48,7 @@ class ClientSeeder extends Seeder
         Client::create([
             'name' => 'Emily',
             'last_name' => 'Johnson',
+            'animal_id' => Animal::inRandomOrder()->first()->id,
             'phone' => '5559876543',
             'email' => 'emilyjohnson@example.com',
             'state' => 'Florida',
