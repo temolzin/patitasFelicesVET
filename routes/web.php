@@ -126,6 +126,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('clients', ClientController::class);
 
     Route::post('/generate-report', [StoreController::class, 'generateReport'])->name('generate.report');
+    Route::post('/generate-annual-report', [StoreController::class, 'generateAnnualReport'])->name('generate.annual.report');
     Route::get('/stores', [StoreController::class, 'index'])->name('stores.index');
     Route::resource('stores', StoreController::class);
     
