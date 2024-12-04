@@ -16,10 +16,10 @@
                                 <i class="fa fa-plus"></i> Registrar venta
                             </button>
                             <button type="button" class="btn bg-maroon mr-3" data-toggle="modal" data-target="#generateReportModal">
-                                <i class="fa fa-plus"></i> Reporte Mensual
+                                <i class="fa fa-file-pdf "></i>  Reporte Mensual
                             </button>
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#annualEarningsModal">
-                                <i class="fa fa-plus"></i>Reporte Anual
+                                <i class="fa fa-file-pdf"></i>  Reporte Anual
                             </button>
                         </div>
                     </div>
@@ -74,6 +74,7 @@
                                 </table>
                                 @include('stores.create')
                                 @include('stores.generateReportModal')
+                                @include('stores.annualEarningsModal')
                             </div>
                         </div>
                     </div>

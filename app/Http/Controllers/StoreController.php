@@ -192,4 +192,74 @@ class StoreController extends Controller
     
         return $pdf->download('reporte_ventas_' . $startDate . '_a_' . $endDate . '.pdf');
     }
+
+    public function generateAnnualReport(Request $request)
+    {
+        $year = $request->input('year', now()->year);
+        $months = [];
+        $authUser = auth()->user();
+
+        for ($i = 1; $i <= 12; $i++) {
+            $monthStores = Store::whereYear('created_at', $year)
+                                ->whereMonth('created_at', $i)
+                                ->with(['products', 'services'])
+                                ->get();
+                                
+                                
+            $monthTotal = $monthStores->sum(function($store)
+            {
+                $productsTotal = $store->products->sum(function($product)
+                {
+                    return $product->pivot->quantity * $product->cost;
+                });
+                
+                $servicesTotal = $store->services->sum(function($service)
+                {
+                    return $service->pivot->quantity * $service->cost;
+                });
+                
+                return $productsTotal + $servicesTotal;
+            });
+            
+            $servicesSold = [];
+            foreach ($monthStores as $store)
+            {
+                foreach ($store->services as $service)
+                {
+                    if (!isset($servicesSold[$service->name]))
+                    {
+                        $servicesSold[$service->name] = ['quantity' => 0, 'total' => 0];
+                    }
+                    
+                    $servicesSold[$service->name]['quantity'] += $service->pivot->quantity;
+                    $servicesSold[$service->name]['total'] += $service->pivot->quantity * $service->cost;
+                }
+            }
+            
+            $productsSold = [];
+            foreach ($monthStores as $store)
+            {
+                foreach ($store->products as $product)
+                {
+                    if (!isset($productsSold[$product->name]))
+                    {
+                        $productsSold[$product->name] = ['quantity' => 0, 'total' => 0];
+                    }
+                    $productsSold[$product->name]['quantity'] += $product->pivot->quantity;
+                    $productsSold[$product->name]['total'] += $product->pivot->quantity * $product->cost;
+                }
+            }
+            
+            $months[] = [
+                'month' => \Carbon\Carbon::create()->month($i)->format('F'),
+                'total' => $monthTotal,
+                'services' => $servicesSold,
+                'products' => $productsSold
+            ];
+        }
+        
+        Log::info('Reporte Anual: ', ['months' => $months]);
+        $pdf = PDF::loadView('reports.reportsAnnual', compact('year', 'months', 'authUser'));
+        return $pdf->download('reporte_anual_ventas.pdf');
+    }
 }
