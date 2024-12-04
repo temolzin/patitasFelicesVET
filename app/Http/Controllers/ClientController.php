@@ -29,7 +29,7 @@ class ClientController extends Controller
 
     public function create()
     {
-        $animals = Animal::all(); // Obtén todos los animales para el select
+        $animals = Animal::all(); 
         return view('clients.create', compact('animals'));
     }
 

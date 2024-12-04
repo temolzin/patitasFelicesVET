@@ -12,7 +12,6 @@
             margin: 8;
             padding: 8;
         }
-
         .header {
             background-color: #00796b;
             color: #ffffff;
@@ -22,18 +21,15 @@
             font-weight: 700;
             margin-bottom: 20px;
         }
-
         .image-container {
             text-align: center;
         }
-
         .image-container img {
             height: 140px;
             width: 140px;
             border-radius: 50%;
             border: 4px solid #00796b;
         }
-
         .section h3 {
             margin-bottom: 10px;
             font-size: 1.8em;
@@ -41,7 +37,6 @@
             padding-bottom: 5px;
             color: #00796b;
         }
-
         .section p {
             margin: 9px 0;
             font-size: 1.1em;
