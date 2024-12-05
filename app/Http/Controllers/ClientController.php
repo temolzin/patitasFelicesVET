@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
-use App\Models\Animal;
 use App\Models\Client;
+use App\Models\Animal;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the clients.
-     */
     public function index()
     {
         $clients = Client::all();
-        $pets = Animal::all();
+        $animals = Animal::all(); 
 
-        return view('clients.index', compact('clients', 'pets'));
+        return view('clients.index', compact('clients', 'animals'));
     }
 
     public function generateClientReport($clientId)
@@ -32,113 +27,77 @@ class ClientController extends Controller
         return $pdf->download('reporte_cliente_' . $client->id . '.pdf');
     }
 
-    public function selectPets($clientId)
-    {
-        $client = Client::findOrFail($clientId);
-        $pets = Animal::where('client_id', null)->get(); 
-
-        return view('clients.selectPets', compact('client', 'pets'));
-    }
-
-    public function updatePets(Request $request, $clientId)
-    {
-        $client = Client::findOrFail($clientId);
-        $petIds = $request->input('pets');
-
-        $currentPetsCount = $client->animals()->count();
-        $newPetsCount = count($petIds);
-
-        if ($currentPetsCount + $newPetsCount > $client->number_pets)
-        {
-            return redirect()->route('clients.index')->with('error', 'No puedes asignar más mascotas. Límite alcanzado.');
-        }
-
-        foreach ($petIds as $petId) {
-            $animal = Animal::find($petId);
-            if ($animal) {
-                $animal->client_id = $clientId; 
-                $animal->save(); 
-            }
-        }
-        return redirect()->route('clients.index')->with('success', 'Mascotas asignadas correctamente.');
-    }
-
     public function create()
     {
-        $animals = Animal::all();
-
+        $animals = Animal::all(); 
         return view('clients.create', compact('animals'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'animal_id' => 'required|exists:animals,id',
+            'phone' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'state' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'colony' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'postal_code' => 'required|string|max:10',
-            'number_pets' => 'required|integer',
-            'observations' => 'nullable|string|max:1000',
+            'number_pets' => 'nullable|integer|min:0',
+            'observations' => 'nullable|string',
         ]);
 
-        $cliente = Client::create($data);
-        if ($request->animals) {
-            Animal::whereIn('id', $request->animals)->update(['client_id' => $cliente->id_client]);
-        }
-        return redirect()->route('clients.index')->with('success', 'Cliente creado exitosamente y mascotas asignadas.');
+        Client::create($validated);
+
+        return redirect()->route('clients.index')->with('success', 'Cliente creado exitosamente.');
     }
 
-    public function edit($id)
+    public function show(Client $client)
     {
-        $client = Client::findOrFail($id);
-        $animals = Animal::all();
+        $client->load('animal');
+        return view('clients.show', compact('client'));
+    }
 
+    public function edit(Client $client)
+    {
+        $animals = Animal::all();
         return view('clients.edit', compact('client', 'animals'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'animal_id' => 'required|exists:animals,id',
+            'phone' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'state' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'colony' => 'nullable|string|max:255',
+            'colony' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'postal_code' => 'nullable|string|max:10',
-            'number_pets' => 'nullable|integer',
-            'observations' => 'nullable|string|max:1000',
+            'postal_code' => 'required|string|max:10',
+            'number_pets' => 'nullable|integer|min:0',
+            'observations' => 'nullable|string',
         ]);
-        $client = Client::findOrFail($id);
-        $client->update($data);
+
+        $client->update($validated);
 
         return redirect()->route('clients.index')->with('success', 'Cliente actualizado exitosamente.');
     }
 
-    public function show($id)
+    public function showClientReport($id)
     {
-        $client = Client::with('pets')->findOrFail($id);
-        return view('clients.show', compact('client'));
-    }
-
-    public function report($clientId)
-    {
-        $client = Client::with('pets')->findOrFail($clientId);
+        $client = Client::with('animals')->find($id);
         return view('clients.client_report', compact('client'));
     }
 
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        $client = Client::find($id);
         $client->delete();
-
         return redirect()->route('clients.index')->with('success', 'Cliente eliminado exitosamente.');
     }
 }

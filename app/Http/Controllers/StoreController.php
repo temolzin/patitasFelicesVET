@@ -20,7 +20,6 @@ class StoreController extends Controller
 
         if ($request->has('search')) {
             $search = $request->input('search');
-            
             $query->whereHas('products', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
             })
@@ -151,8 +150,8 @@ class StoreController extends Controller
 
     public function destroy($id)
     {
-        $store = Store::findOrFail($id); 
-        $store->delete();  
+        $store = Store::findOrFail($id);
+        $store->delete();
         return redirect()->route('stores.index')->with('success', 'Venta eliminada correctamente.');
     }
 

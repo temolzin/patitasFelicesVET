@@ -51,12 +51,17 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label for="number_pets" class="form-label">Número de Mascotas</label>
-                                            <input type="number" class="form-control" id="number_pets" name="number_pets" value="0" />
-                                        </div>
+                                        <label for="animal_id">Seleccionar Mascota:</label>
+                                        <select class="form-control select2" id="animal_id" name="animal_id" required>
+                                            <option value="">Seleccione una mascota</option>
+                                            @foreach($animals as $animal)
+                                                <option value="{{ $animal->id }}" {{ old('animal_id') == $animal->id ? 'selected' : '' }}>
+                                                    {{ $animal->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="phone" class="form-label">Teléfono(*)</label>
                                             <input type="text" class="form-control @error('phone') is-invalid @enderror"
@@ -69,7 +74,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="email" class="form-label">Correo Electrónico(*)</label>
                                             <input type="email" class="form-control @error('email') is-invalid @enderror"
@@ -82,7 +87,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="state" class="form-label">Estado(*)</label>
                                             <input type="text" class="form-control @error('state') is-invalid @enderror"
@@ -147,7 +152,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="observations" class="form-label">Observaciones</label>
                                             <textarea class="form-control @error('observations') is-invalid @enderror"
@@ -172,3 +177,11 @@
         </div>
     </div>
 </div>
+
+<style>
+    .select2-container .select2-selection--single {
+        height: 40px;
+        display: flex;
+        align-items: center;
+    }
+</style>

@@ -12,7 +12,6 @@
             margin: 8;
             padding: 8;
         }
-
         .header {
             background-color: #00796b;
             color: #ffffff;
@@ -22,18 +21,15 @@
             font-weight: 700;
             margin-bottom: 20px;
         }
-
         .image-container {
             text-align: center;
         }
-
         .image-container img {
             height: 140px;
             width: 140px;
             border-radius: 50%;
             border: 4px solid #00796b;
         }
-
         .section h3 {
             margin-bottom: 10px;
             font-size: 1.8em;
@@ -41,7 +37,6 @@
             padding-bottom: 5px;
             color: #00796b;
         }
-
         .section p {
             margin: 9px 0;
             font-size: 1.1em;
@@ -60,7 +55,6 @@
                     <p><strong>Apellido:</strong> {{ $client->last_name }}</p>
                     <p><strong>Teléfono:</strong> {{ $client->phone }}</p>
                     <p><strong>Email:</strong> {{ $client->email }}</p>
-                    <p><strong>Número de Mascotas:</strong> {{ $client->number_pets }}</p>
                 </div>
                 <div class="section">
                     <h3>Dirección</h3>
@@ -72,16 +66,13 @@
                 </div>
                 <div class="section">
                     <h3>Mascotas Asignadas</h3>
-                    @if($client->animals && $client->animals->isNotEmpty())
-                        <ul>
-                            @foreach($client->animals as $animal)
-                                <li>{{ $animal->name }}</li> 
-                            @endforeach
-                        </ul>
+                    <p><strong>Id del la Macota:</strong> {{ $client->animal_id }}</p>
+                    @if($client->animal)
+                        <p><strong>Nombre de la Mascota:</strong> {{ $client->animal->name }}</p>
                     @else
-                        <p>No hay mascotas asignadas a este cliente.</p>
+                        <p><strong>Nombre de la Mascota:</strong> No tiene mascota asignada.</p>
                     @endif
-                </div>                
+                </div>                              
             </div>
         </div>
     </div>

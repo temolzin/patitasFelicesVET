@@ -49,7 +49,7 @@
                                                         <td>{{ $client->phone }}</td>
                                                         <td>{{ $client->email }}</td>
                                                         <td>{{ $client->city }}</td>
-                                                        <td>{{ $client->number_pets }}</td>
+                                                        <td>{{ $client->animal->name }}</td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Opciones">
                                                                 <button type="button" class="btn btn-info mr-2" data-toggle="modal" title="Ver Detalles" data-target="#view{{ $client->id }}">
@@ -63,14 +63,10 @@
                                                                 </button>
                                                                 <button type="button" class="btn btn-primary mr-2" title="Generar Reporte" onclick="window.location.href='{{ route('clients.report', Crypt::encrypt($client->id)) }}'">
                                                                     <i class="fas fa-file-alt"></i>
-                                                                </button>
-                                                                <button type="button" class="btn bg-maroon mr-2" title="Seleccionar Mascotas" data-toggle="modal" data-target="#selectPets{{ $client->id }}">
-                                                                    <i class="fas fa-paw"></i>
-                                                                </button>   
+                                                                </button> 
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @include('clients.selectPets', ['client' => $client, 'pets' => $pets])
                                                     @include('clients.show')
                                                     @include('clients.edit')
                                                     @include('clients.delete')

@@ -14,6 +14,7 @@ class Client extends Model
     protected $fillable = [
         'name',
         'last_name',
+        'animal_id',
         'phone',
         'email',
         'state',
@@ -21,13 +22,17 @@ class Client extends Model
         'colony',
         'address',
         'postal_code',
-        'number_pets',
         'observations',
     ];
     
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class, 'animal_id');
+    }
+    
     public function animals()
     {
-        return $this->hasMany(Animal::class, 'client_id');
+        return $this->hasMany(Animal::class, 'client_id', 'id');
     }
 
     public function stores()
